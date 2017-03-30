@@ -90,3 +90,8 @@ audio {
 #pause-button {
 	display: none;
 }
+
+#songName {
+	font-size: 4em;
+	color: white;
+}

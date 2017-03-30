@@ -1,6 +1,6 @@
 
 var player;
-var songNum = 0;
+var songNum = 1;
 var songs = [];
 songs[0] = new song ("Suzanne Kraft","No Worries (Secret Circuit Professional Gold Mix)","AtyOo0OePPA","1FTn5osUbCr8n7WgYmbK5m","https://f4.bcbits.com/img/a2725264209_10.jpg")
 songs[1] = new song ("Young Marco","Psychotic Particle","8J47f2om1zs","7zpN81tVvPwlHcJSkSCyRa","http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg");
@@ -17,7 +17,7 @@ function onYouTubeIframeAPIReady() {
 }
 
 function onPlayerReady(event) {
-  
+  $("#songName").html(songs[songNum].artist + "-" + songs[songNum].title);
   // bind events
   var playButton = $("#play-button");
   playButton.on("click", function() {
