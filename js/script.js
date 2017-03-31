@@ -228,7 +228,14 @@ function prevSong() {
   }  
 }
 
+$("#viewVid").on("click", function() {
+  $("#player").toggle();
+});
 
+$("#iconMenu ul li").click(function(e) {
+  console.log($(this));
+  $(this).children().toggleClass("active").toggleClass("icons");
+});
 
 // AJAX call to search for seat geek artist ID
 // $.get("https://api.seatgeek.com/2/performers?q=lolitas&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5", function(d) {

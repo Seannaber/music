@@ -26,6 +26,15 @@
 				<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
 				<div class="col-xs-1"></div>
 			</div>
+			<div id="player"></div>
+			<div id="iconMenu">
+				<ul>
+					<li><span id="like" class="icons glyphicon glyphicon-heart"></span></li>
+					<li><span id="hate" class="icons glyphicon glyphicon-ban-circle"></span></li>
+					<li><span id="shuffle" class="icons glyphicon glyphicon-random"></span></li>
+					<li><span id="viewVid" class="icons glyphicon glyphicon-eye-open"></span></li>
+				</ul>
+			</div>
 		</section>
 		<section id="related" class="text-center">
 			<h1>Related Artists</h1>
@@ -40,7 +49,7 @@
 		    type='audio/mpeg'>
 		    </source>
 		</audio>
-		<div id="player"></div>
+		
 	</div>
 	<script
   src="http://code.jquery.com/jquery-3.2.1.min.js"

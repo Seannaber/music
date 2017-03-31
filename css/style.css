@@ -127,13 +127,24 @@ html, body {
 	background-image: url(https://f4.bcbits.com/img/0006174563_10.jpg),
 }
 
-#main {
-	
+.active {
+	color: yellow;
+	font-size: 5em;
 }
 
-/*html {
-	background-color: green;
-}*/
+.icons {
+	color: white;
+	font-size: 5em;
+}
+
+#iconMenu ul li {
+	display: inline;
+	padding: 0px 50px;
+}
+
+#iconMenu ul {
+	margin: 100px 0px;
+}
 
 .preview {
 	width: 75px;
