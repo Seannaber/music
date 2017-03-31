@@ -1,13 +1,11 @@
-
 var player;
 var songNum = 0;
 var songs = [];
-songs[0] = new song ("Suzanne Kraft","No Worries (Secret Circuit Professional Gold Mix)","AtyOo0OePPA","1FTn5osUbCr8n7WgYmbK5m","160336", "https://f4.bcbits.com/img/a2725264209_10.jpg")
-songs[1] = new song ("Young Marco","Psychotic Particle","8J47f2om1zs","7zpN81tVvPwlHcJSkSCyRa","163743","http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg");
+songs[0] = new song ("Suzanne Kraft","No Worries (Secret Circuit Professional Gold Mix)","6OfmeAz1sJQ","1FTn5osUbCr8n7WgYmbK5m","160336", "https://f4.bcbits.com/img/a2725264209_10.jpg")
+songs[1] = new song ("Young Marco","Psychotic Particle","8J47f2om1zs","7zpN81tVvPwlHcJSkSCyRa","163743","http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg");
 songs[2] = new song ("Maceo Plex","Polygon Pulse", "NHjDC0dMDv8", "3TXQ1ddouwQAI78hV4hXDj", "22656", "https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg" );
 songs[3] = new song ("Fort Romeau","Saku", "H0iKVNwpk8Y", "5MKqWyqq5CStK7AhkTvzQF", "178049", "http://scontent.cdninstagram.com/t51.2885-15/e35/17333260_402281090132204_5352682402290335744_n.jpg?ig_cache_key=MTQ3MjY1MDkxNTc5MzM2OTQ5MA%3D%3D.2" );
-songs[4] = new song ("Anatolian Weapons","A Strange Light From The East", "LsayLmUAPeE", "2xprJuO9NOXzoLQXlED6oT", "178049", "https://f4.bcbits.com/img/0006174563_10.jpg" );
-songs[songNum].changeBg("song" + songNum);
+songs[4] = new song ("Anatolian Weapons","A Strange Light From The East", "LsayLmUAPeE", "2xprJuO9NOXzoLQXlED6oT", "178049", "http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg" );
 songs[songNum].changeEvents();
 // songs[songNum].changeRelated();
 
@@ -17,8 +15,14 @@ function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
     videoId: songs[songNum].youtubeId,
     events: {
-      // 'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
+      'onReady': function() {
+        songs[songNum].changeEvents();
+        songs[songNum].changeRelated();
+      },
+      'onStateChange': function(e) {
+        updateBar();
+        onPlayerStateChange(e);
+      }
     }
   });
   $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
@@ -26,8 +30,9 @@ function onYouTubeIframeAPIReady() {
 
 // Loads next track when current song has finished playing
 function onPlayerStateChange(e) {
-
-  if (e.data == 0) {
+  vidPlayerState = e.data;
+  if (vidPlayerState === 0) {
+    ctx.clearRect(0, 0, 300, 300);
     nextSong();
   }
 }
@@ -35,6 +40,7 @@ function onPlayerStateChange(e) {
 // Fires when play button is clicked
 var playButton = $("#play-button");
 playButton.on("click", function() {
+  audio[0].pause();
   player.playVideo();
   $(this).animate({
     opacity: "toggle"}, 450, function() {
@@ -48,6 +54,7 @@ playButton.on("click", function() {
 var pauseButton = $("#pause-button");
 // pauseButton.hide();
 pauseButton.on("click", function() {
+  audio[0].pause();
   player.pauseVideo();
   $(this).animate({
     // height: 400,
@@ -84,18 +91,18 @@ var audio = $('#spotifyPlayer');
 
 // Plays Spotify preview of related artists when play button next to artist name is clicked
 // If spotify preview is currently playing, pause it
-$("#related").click(function(e) {
-  var theTarget = $(e.target);
-  console.log(theTarget);
-  if (!audio.paused) {
-    theTarget.attr('src', "img/pause.png")
-    audio[0].pause();
-  } else {
-    theTarget.attr('src', "img/play.png")
-    audio.play();
-  }
+// $("#related").click(function(e) {
+//   var theTarget = $(e.target);
+//   console.log(theTarget);
+//   if (!audio.paused) {
+//     theTarget.attr('src', "img/pause.png")
+//     audio[0].pause();
+//   } else {
+//     theTarget.attr('src', "img/play.png")
+//     audio.play();
+//   }
   
-});
+// });
 
 loadTrack = function(artistId) {
   spotifyApi.getArtistTopTracks(artistId, 'US', 
@@ -104,10 +111,29 @@ loadTrack = function(artistId) {
       audio.attr("src",previewUrl);
       player.pauseVideo();
       audio[0].play();
-      var albumArt = d.tracks[0].album.images[0].url;
-      // $("body").css("backgroundImage","url('" + albumArt + "')");
-    })
+      if (vidPlayerState === 1) {
+        pauseButton.animate({
+        opacity: "toggle"}, 450, function() {
+          $(this).hide().fadeOut(function() {
+            playButton.show();
+          });
+        });
+      }
+
+        // var albumArt = d.tracks[0].album.images[0].url;
+        // $("body").css("backgroundImage","url('" + albumArt + "')");
+      })
 };
+
+// pauseTrack = function(e) {
+//   audio[0].pause();
+//   pauseButton.animate({
+//       opacity: "toggle"}, 450, function() {
+//         $(this).hide().fadeOut(function() {
+//           playButton.show();
+//         });
+//       });
+// }
 
 var shows = $("#showList");
 var msg = "";
@@ -121,6 +147,7 @@ function song (artist, title, youtubeId, spotifyId, seatgeekId, bgImage) {
   this.youtubeId = youtubeId,
   this.spotifyId = spotifyId,
   this.seatgeekId = seatgeekId,
+  // on song change, updates background
   this.changeBg = function (songNum) {
     $("body").attr("class",songNum);
   },
@@ -141,6 +168,9 @@ function song (artist, title, youtubeId, spotifyId, seatgeekId, bgImage) {
     $.get("https://api.seatgeek.com/2/events?performers.id=" + songs[songNum].seatgeekId + "&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5", function(d) {   
       var msg = '';
       $("#showList").html(msg);
+      if (d.events.length === 0) {
+        $("#showList").html("<li>No upcoming performances...</li>");
+      } else {
       for (var i = 0; i<d.events.length; i++) {
         msg += "<li>"
         msg += "<h3>" + d.events[i].datetime_local.slice(0,10) + "</h3>";
@@ -150,11 +180,13 @@ function song (artist, title, youtubeId, spotifyId, seatgeekId, bgImage) {
         msg += "</li>";
         };
         $("#showList").html(msg);
+      }
 })}
 }
 
 // moves to next song in songs array
 function nextSong() {
+  ctx.clearRect(0, 0, 300, 300);
   songNum += 1;
   if (songNum >= songs.length) {
     songNum = 0;
@@ -176,6 +208,7 @@ function nextSong() {
 
 // moves to previous song in songs array
 function prevSong() {
+    ctx.clearRect(0, 0, 300, 300);
     if (songNum === 0) {
     songNum = songs.length - 1;
     console.log(songNum);
@@ -195,7 +228,19 @@ function prevSong() {
   }  
 }
 
+
+
 // AJAX call to search for seat geek artist ID
 // $.get("https://api.seatgeek.com/2/performers?q=lolitas&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5", function(d) {
+//   console.log(d);
+// });
+
+// Testing discogs API
+// $.get("https://api.discogs.com/artists/1626911", function(d) {
+//   console.log(d);
+// });
+
+// Testing Blitzr API
+// $.get("https://api.blitzr.com/radio/artist/?uuid=spotify:1jBkXf5NwyxgbUw9fWxAOE&key=7f643b85049c768c1727dbeaf587f824", function(d) {
 //   console.log(d);
 // });

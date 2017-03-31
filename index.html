@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Nebulo.us</title>
+	<title>beech.fm</title>
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa:300|Raleway:200,800" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -19,6 +19,7 @@
 				<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
 				<div class="col-xs-0"></div>
 				<div class="col-xs-4">
+					<canvas id="counter" width="300" height="300"></canvas> 
 					<img src="img/play.png" id="play-button" class="align-middle play center-block text-center">
 					<img src="img/pause.png" id="pause-button" class="align-middle play center-block text-center"></div>
 				<div class="col-xs-0"></div>
@@ -28,11 +29,11 @@
 		</section>
 		<section id="related" class="text-center">
 			<h1>Related Artists</h1>
-			<ul id="relatedList"></ul>
+			<ul id="relatedList">Loading...</ul>
 		</section>
 		<section id="shows" class="text-center">
 			<h1>Upcoming Shows</h1>
-			<ul id="showList"></ul>
+			<ul id="showList">Loading...</ul>
 		</section>
 		<audio id="spotifyPlayer" controls>
 		    <source src="" 
@@ -58,6 +59,9 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script
 	  src="js/spotify-web-api.js"></script>
+	  <script 
+		src="js/progress.js">
+	</script>
 	<script 
 		src="js/script.js">
 	</script>

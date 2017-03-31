@@ -35,6 +35,18 @@ body {
 	/*overflow: hidden;*/
 }
 
+/*#color {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: yellow;
+	width: 1000px;
+}
+
+html, body {
+	height: 100%;
+}*/
+
 .song0 {
 	background-image: url(https://i.scdn.co/image/e8900a109b7533b3ebc8b814c522aa35b84d8092),
 	-moz-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
@@ -52,35 +64,35 @@ body {
 }
 
 .song1 {
-	background-image: url(http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg),
+	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg),
 	-moz-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg), 
+	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
 	-webkit-gradient(left top, left bottom, color-stop(0%, rgba(15,5,94,1)), color-stop(49%, rgba(0,189,247,1)), color-stop(77%, rgba(65,130,117,1)), color-stop(100%, rgba(251,223,147,1)));
-	background-image: url(http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg), 
+	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
 	-webkit-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg), 
+	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
 	-o-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg), 
+	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
 	-ms-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg), 
+	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
 	linear-gradient(to bottom, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://redlightradio.net/wp-content/uploads/2016/06/Young-Marco-2015-3.jpg),
+	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg),
 }
 
 .song2 {
-	background-image: url(https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg),
+	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg),
 	-moz-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg), 
+	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
 	-webkit-gradient(left top, left bottom, color-stop(0%, rgba(15,5,94,1)), color-stop(49%, rgba(0,189,247,1)), color-stop(77%, rgba(65,130,117,1)), color-stop(100%, rgba(251,223,147,1)));
-	background-image: url(https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg), 
+	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
 	-webkit-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg), 
+	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
 	-o-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg), 
+	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
 	-ms-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg), 
+	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
 	linear-gradient(to bottom, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg),
+	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg),
 }
 
 .song3 {
@@ -126,6 +138,12 @@ body {
 .preview {
 	width: 75px;
 	padding-left: 20px;
+}
+
+canvas {
+    position: absolute;
+    display: block;
+    float: left;
 }
 
 #related, #shows {
@@ -197,3 +215,4 @@ audio {
 	margin-right: 35px;
 	margin-top: -430px;
 }
+
