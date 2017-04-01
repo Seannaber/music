@@ -6,49 +6,53 @@
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa:300|Raleway:200,800" rel="stylesheet">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/onepage-scroll.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body class="song0">
-	<div id="color" class="text-center">
-		<h1 class="logo">beech.fm</h1>
-		<span class="mobileMenu glyphicon glyphicon-align-left"></span>
-		<section id="main" class="text-center">
-			<div id="songName"></div>
-			<div class="row text-center">
-				<div class="col-xs-1"></div>
-				<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
-				<div class="col-xs-0"></div>
-				<div class="col-xs-4">
-					<canvas id="counter" width="300" height="300"></canvas> 
-					<img src="img/play.png" id="play-button" class="align-middle play center-block text-center">
-					<img src="img/pause.png" id="pause-button" class="align-middle play center-block text-center"></div>
-				<div class="col-xs-0"></div>
-				<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
-				<div class="col-xs-1"></div>
-			</div>
-			<div id="player"></div>
-			<div id="iconMenu">
-				<ul>
-					<li><span id="like" class="icons glyphicon glyphicon-heart"></span></li>
-					<li><span id="hate" class="icons glyphicon glyphicon-ban-circle"></span></li>
-					<li><span id="shuffle" class="icons glyphicon glyphicon-random"></span></li>
-					<li><span id="viewVid" class="icons glyphicon glyphicon-eye-open"></span></li>
-				</ul>
-			</div>
-		</section>
-		<section id="related" class="text-center">
-			<h1>Related Artists</h1>
-			<ul id="relatedList">Loading...</ul>
-		</section>
-		<section id="shows" class="text-center">
-			<h1>Upcoming Shows</h1>
-			<ul id="showList">Loading...</ul>
-		</section>
-		<audio id="spotifyPlayer" controls>
-		    <source src="" 
-		    type='audio/mpeg'>
-		    </source>
-		</audio>
+	<div class="main">
+		
+			<section id="main" class="text-center">
+				<h1 class="logo">beech.fm</h1>
+			<span class="mobileMenu glyphicon glyphicon-align-left"></span>
+			
+				<div id="songName"></div>
+				<div class="row text-center">
+					<div class="col-xs-1"></div>
+					<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
+					<div class="col-xs-0"></div>
+					<div class="col-xs-4">
+						<canvas id="counter" width="300" height="300"></canvas> 
+						<img src="img/play.png" id="play-button" class="align-middle play center-block text-center">
+						<img src="img/pause.png" id="pause-button" class="align-middle play center-block text-center"></div>
+					<div class="col-xs-0"></div>
+					<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
+					<div class="col-xs-1"></div>
+				</div>
+				<div id="player"></div>
+				<div id="iconMenu">
+					<ul>
+						<li id="like"><span class="icons glyphicon glyphicon-heart"></span></li>
+						<li id="hate"><span class="icons glyphicon glyphicon-ban-circle"></span></li>
+						<li id="shuffle"><span class="icons glyphicon glyphicon-random"></span></li>
+						<li id="viewVid"><span class="icons glyphicon glyphicon-eye-open"></span></li>
+					</ul>
+					<span class="icons glyphicon glyphicon-menu-down"></span>
+				</div>
+			</section>
+			<section id="related" class="text-center">
+				<h1>Related Artists</h1>
+				<ul id="relatedList">Loading...</ul>
+			</section>
+			<section id="shows" class="text-center">
+				<h1>Upcoming Shows</h1>
+				<ul id="showList">Loading...</ul>
+			</section>
+			<audio id="spotifyPlayer" controls>
+			    <source src="" 
+			    type='audio/mpeg'>
+			    </source>
+			</audio>
 		
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -62,6 +66,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script
 	  src="js/spotify-web-api.js"></script>
+	  <script src="js/jquery.onepage-scroll.min.js"></script>
 	  <script 
 		src="js/progress.js">
 	</script>

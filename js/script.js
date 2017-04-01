@@ -74,6 +74,8 @@ var screenHeight = screen.height;
 $('body').css({'padding-top': screenHeight/2});
 $('#main').css('min-height', screenHeight);
 // $('body').css('min-height', screenHeight);
+$("#iconMenu ul").css('margin-top', screenHeight/2).css('margin-bottom', screenHeight/2);
+// $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 
 var spotifyApi = new SpotifyWebApi();
@@ -158,7 +160,7 @@ function song (artist, title, youtubeId, spotifyId, seatgeekId, bgImage) {
     spotifyApi.getArtistRelatedArtists(artistId, 
       function(err, d){
         var relatedArtists = d.artists;
-        for (var i=0;i<5;i++) {
+        for (var i=0;i<10;i++) {
             $("#relatedList").append("<li>" + relatedArtists[i].name + "<img src=img/play.png class=preview onclick=\"loadTrack('" + relatedArtists[i].id + "')\"></li>");
           };
       })
@@ -228,13 +230,48 @@ function prevSong() {
   }  
 }
 
-$("#viewVid").on("click", function() {
-  $("#player").toggle();
-});
+var shuffle = false;
 
+// switch statement to handle clicks on like/hate/shuffle/viewVid icons
 $("#iconMenu ul li").click(function(e) {
   console.log($(this));
-  $(this).children().toggleClass("active").toggleClass("icons");
+  switch ($(this).attr('id')) {
+    case "like":
+      songs[songNum].hated = false;
+      songs[songNum].liked = !songs[songNum].liked;
+      $(this).children().toggleClass("activeIconHeart").toggleClass("icons");
+      break;
+    case "hate":
+      songs[songNum].liked = false;
+      songs[songNum].hated = !songs[songNum].hated;
+      $(this).children().toggleClass("activeIcon").toggleClass("icons");
+      break;
+    case "shuffle":
+      shuffle = !shuffle; 
+      $(this).children().toggleClass("activeIcon").toggleClass("icons");
+      break;
+    case "viewVid":
+      $("#player").toggle();
+      $(this).children().toggleClass("activeIcon").toggleClass("icons");
+      break;
+  }
+});
+
+$(".main").onepage_scroll({
+   sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
+   easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",
+                                    // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+   animationTime: 1000,             // AnimationTime let you define how long each section takes to animate
+   pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.
+   updateURL: false,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
+   beforeMove: function(index) {},  // This option accepts a callback function. The function will be called before the page moves.
+   afterMove: function(index) {},   // This option accepts a callback function. The function will be called after the page moves.
+   loop: false,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
+   keyboard: true,                  // You can activate the keyboard controls
+   responsiveFallback: false,        // You can fallback to normal page scroll by defining the width of the browser in which
+                                    // you want the responsive fallback to be triggered. For example, set this to 600 and whenever
+                                    // the browser's width is less than 600, the fallback will kick in.
+   direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".  
 });
 
 // AJAX call to search for seat geek artist ID

@@ -127,9 +127,16 @@ html, body {
 	background-image: url(https://f4.bcbits.com/img/0006174563_10.jpg),
 }
 
-.active {
+.activeIcon {
 	color: yellow;
-	font-size: 5em;
+	font-size: 6em;
+	transition: all 200ms;
+}
+
+.activeIconHeart {
+	color: red;
+	font-size: 6em;
+	transition: all 200ms;
 }
 
 .icons {
@@ -143,7 +150,7 @@ html, body {
 }
 
 #iconMenu ul {
-	margin: 100px 0px;
+	margin: 0px;
 }
 
 .preview {
@@ -163,7 +170,7 @@ canvas {
 	list-style-type: none;
 	line-height: 2em;
 	background-color: rgba(0,0,0,.55);
-	max-width: 70%;
+	/*max-width: 70%;*/
 	margin: 100px auto 0px auto;
 }
 
