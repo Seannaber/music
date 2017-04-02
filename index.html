@@ -10,8 +10,9 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body class="song0">
+	
 	<div class="main text-center">
-		
+		<div id="wrapper">
 			<section id="main" class="text-center">
 				<h1 class="logo">beech.fm</h1>
 			<span class="mobileMenu glyphicon glyphicon-align-left"></span>
@@ -29,7 +30,7 @@
 					<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
 					<div class="col-xs-1"></div>
 				</div>
-				<div id="player"></div>
+
 				<div id="iconMenu" class="align-middle text-center">
 					<ul class="align-middle text-center">
 						<li id="like"><span class="icons glyphicon glyphicon-heart"></span></li>
@@ -38,9 +39,10 @@
 						<li id="viewVid"><span class="icons glyphicon glyphicon-eye-open"></span></li>
 						<li id="info"><span class="icons glyphicon glyphicon-info-sign"></span></li>
 					</ul>
-					<a data-index="2" href="#related"><span class="icons glyphicon glyphicon-menu-down"></span></a>
+					<a data-index="2" href="#2"><span id="toPage2" class="icons glyphicon glyphicon-menu-down"></span></a>
 				</div>
 			</section>
+			
 			<section id="related" class="text-center">
 				<h1>Related Artists</h1>
 				<ul id="relatedList">Loading...</ul>
@@ -55,7 +57,25 @@
 			    type='audio/mpeg'>
 			    </source>
 			</audio>
-		
+			
+		</div>
+	</div>
+	<div id="player"></div>
+	<span id="hideVid" class="icons glyphicon glyphicon-remove"></span>
+	<div id="bio" class="text-center">
+		<h1>Artist bio</h1>
+		<p id="bioText">Sorry, there doesn't seem to be a bio for this artist.</p>
+	</div><span id="hideBio" class="icons glyphicon glyphicon-remove"></span>
+	<div id="menu">
+		<ul>
+			<li>Artist info</li>
+			<li>Similar artists</li>
+			<li>Upcoming events</li>
+			<li>Purchase options</li>
+			<li>Stats</li>
+			<li>Likes</li>
+		</ul>
+	    <span id="hideMenu" class="icons glyphicon glyphicon-remove"></span>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>

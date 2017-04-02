@@ -151,7 +151,7 @@ function song (artist, title, youtubeId, spotifyId, seatgeekId, bgImage) {
   this.seatgeekId = seatgeekId,
   // on song change, updates background
   this.changeBg = function (songNum) {
-    $("body").attr("class",songNum);
+    $("#wrapper").attr("class",songNum);
   },
   // on song change, updates related artists from Spotify API
   this.changeRelated = function () {
@@ -251,8 +251,11 @@ $("#iconMenu ul li").click(function(e) {
       $(this).children().toggleClass("activeIcon").toggleClass("icons");
       break;
     case "viewVid":
-      $("#player").toggle();
+      $("#hideVid, #player").toggle();
       $(this).children().toggleClass("activeIcon").toggleClass("icons");
+      break;
+    case "info":
+      $("#hideBio, #bio").toggle();
       break;
   }
 });
@@ -273,6 +276,29 @@ $(".main").onepage_scroll({
                                     // the browser's width is less than 600, the fallback will kick in.
    direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".  
 });
+
+$("#bio").hide();
+$("#hideBio").hide();
+$("#hideBio").click(function() {
+  $("#bio, #hideBio").toggle();
+});
+
+$("#hideVid").hide();
+$("#hideVid").click(function() {
+  $("#player, #hideVid").toggle();
+});
+
+$("#toPage2").click(function() {
+  $("body").removeClass("viewing-page-1").addClass("viewing-page-2");
+});
+
+$("#menu").css('right', '100%');
+$(".mobileMenu").click(function() {
+  $("#menu").css('right', '60%');
+  $(".main").css('left', '40%');
+});
+
+
 
 // AJAX call to search for seat geek artist ID
 // $.get("https://api.seatgeek.com/2/performers?q=lolitas&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5", function(d) {

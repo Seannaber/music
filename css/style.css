@@ -28,11 +28,26 @@ body {
 	max-width: 1200px;
 	padding: 0px;
 	height: 100%;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f055e', endColorstr='#fbdf93', GradientType=0 );
 	background-blend-mode: multiply;
 	background-size: cover;
 	background-position: center;
 	/*overflow: hidden;*/
+}
+
+#wrapper {
+	margin: 0px auto;
+	max-width: 1200px;
+	padding: 0px;
+	height: 100%;
+	background-blend-mode: multiply;
+	background-size: cover;
+	background-position: center;
+
+
+}
+
+.active {
+	right: 50%;
 }
 
 /*#color {
@@ -155,6 +170,7 @@ html, body {
 	margin: 0 auto;
 	position: absolute;
 	bottom: 50px;
+	z-index: 100;
 }
 
 .preview {
@@ -174,6 +190,38 @@ canvas {
     position: absolute;
     display: block;
     float: left;
+}
+
+#player {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+#bio {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	font-size: 3em;
+	color: white;
+	list-style-type: none;
+	line-height: 2em;
+	background-color: rgba(0,0,0,.75);
+	/*max-width: 70%;*/
+	margin: 100px auto 0px auto;
+	padding: 15%;
+	margin-top: 0px;
+}
+
+#hideVid, #hideBio {
+	position: absolute;
+	right: 65px;
+	top: 65px;
+	z-index: 50;
 }
 
 #related, #shows {
@@ -247,3 +295,34 @@ audio {
 	opacity: .50;
 }
 
+#menu {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	right: 3000px;
+	font-size: 3em;
+	color: black;
+	list-style-type: none;
+	line-height: 2em;
+	background-color: white;
+	/*max-width: 70%;*/
+	margin: 100px auto 0px auto;
+	padding: 15%;
+	margin-top: 0px;
+	transition: all .3s;
+	/*z-index: -500;*/
+	text-align: right;
+}
+
+#hideMenu {
+	color: black;
+	font-size: 2em;
+	position: absolute;
+	right: 60px;
+	top: 60px;
+}
+
+.main {
+	transition: all .3s;
+}
