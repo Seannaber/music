@@ -71,10 +71,10 @@ $("audio").hide();
 
 // Obtains screen height and makes CSS adjustments
 var screenHeight = screen.height;
-$('body').css({'padding-top': screenHeight/2});
+// $('body').css({'padding-top': screenHeight/2});
 $('#main').css('min-height', screenHeight);
 // $('body').css('min-height', screenHeight);
-$("#iconMenu ul").css('margin-top', screenHeight/2).css('margin-bottom', screenHeight/2);
+// $("#iconMenu ul").css('margin-top', screenHeight/2);
 // $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 
@@ -160,7 +160,7 @@ function song (artist, title, youtubeId, spotifyId, seatgeekId, bgImage) {
     spotifyApi.getArtistRelatedArtists(artistId, 
       function(err, d){
         var relatedArtists = d.artists;
-        for (var i=0;i<10;i++) {
+        for (var i=0;i<15;i++) {
             $("#relatedList").append("<li>" + relatedArtists[i].name + "<img src=img/play.png class=preview onclick=\"loadTrack('" + relatedArtists[i].id + "')\"></li>");
           };
       })

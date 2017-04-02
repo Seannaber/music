@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="css/style.css">
 </head>
 <body class="song0">
-	<div class="main">
+	<div class="main text-center">
 		
 			<section id="main" class="text-center">
 				<h1 class="logo">beech.fm</h1>
@@ -30,19 +30,21 @@
 					<div class="col-xs-1"></div>
 				</div>
 				<div id="player"></div>
-				<div id="iconMenu">
-					<ul>
+				<div id="iconMenu" class="align-middle text-center">
+					<ul class="align-middle text-center">
 						<li id="like"><span class="icons glyphicon glyphicon-heart"></span></li>
 						<li id="hate"><span class="icons glyphicon glyphicon-ban-circle"></span></li>
 						<li id="shuffle"><span class="icons glyphicon glyphicon-random"></span></li>
 						<li id="viewVid"><span class="icons glyphicon glyphicon-eye-open"></span></li>
+						<li id="info"><span class="icons glyphicon glyphicon-info-sign"></span></li>
 					</ul>
-					<span class="icons glyphicon glyphicon-menu-down"></span>
+					<a data-index="2" href="#related"><span class="icons glyphicon glyphicon-menu-down"></span></a>
 				</div>
 			</section>
 			<section id="related" class="text-center">
 				<h1>Related Artists</h1>
 				<ul id="relatedList">Loading...</ul>
+				<a data-index="2" href="#shows"><span class="icons glyphicon glyphicon-menu-down"></span></a>
 			</section>
 			<section id="shows" class="text-center">
 				<h1>Upcoming Shows</h1>
