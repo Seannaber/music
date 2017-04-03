@@ -292,10 +292,15 @@ $("#toPage2").click(function() {
   $("body").removeClass("viewing-page-1").addClass("viewing-page-2");
 });
 
-$("#menu").css('right', '100%');
+$("#menu").css('right', '105%');
 $(".mobileMenu").click(function() {
   $("#menu").css('right', '60%');
   $(".main").css('left', '40%');
+});
+
+$("#hideMenu").click(function() {
+  $("#menu").css('right', '105%');
+  $(".main").css('left', '0%');
 });
 
 

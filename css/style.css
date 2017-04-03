@@ -300,7 +300,6 @@ audio {
 	height: 100%;
 	position: absolute;
 	top: 0px;
-	right: 3000px;
 	font-size: 3em;
 	color: black;
 	list-style-type: none;
@@ -308,16 +307,29 @@ audio {
 	background-color: white;
 	/*max-width: 70%;*/
 	margin: 100px auto 0px auto;
-	padding: 15%;
+	padding: 20% 7%;
 	margin-top: 0px;
 	transition: all .3s;
 	/*z-index: -500;*/
 	text-align: right;
+	font-size: 2em;
+	box-shadow: inset -30px 0px 20px -25px;
+    transform: rotate(-3deg);
+    height: 115%;
+    font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+}
+
+#menu p {
+	font-family: 'Raleway', sans-serif;
+	font-weight: 200;
+	font-size: 2.5em;
+	padding-bottom: 40px;
 }
 
 #hideMenu {
 	color: black;
-	font-size: 2em;
+	font-size: 3.5em;
 	position: absolute;
 	right: 60px;
 	top: 60px;
