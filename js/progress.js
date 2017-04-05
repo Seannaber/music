@@ -33,5 +33,3 @@ function updateBar () {
         setTimeout(updateBar,200);
     }
 }
-
-console.log(player)
