@@ -221,20 +221,27 @@ function song (artist, title, youtubeId, bgImage) {
           };
       })
   },
+
+
+//   $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[2].artist + "&jsoncallback=?", function(d) {
+//   console.log(d.resultsPage.results.event["0"].displayName);
+// });
+
   // on song change, updates upcoming events from Seat Geek
   this.changeEvents = function () {
-    $.get("https://api.seatgeek.com/2/events?performers.id=" + songs[songNum].seatgeekId + "&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5", function(d) {   
+    $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[songNum].artist + "&jsoncallback=?", function(d) {   
       var msg = '';
       $("#showList").html(msg);
-      if (d.events.length === 0) {
+      console.log(d);
+      if (d.resultsPage.length === 0) {
         $("#showList").html("<li>No upcoming performances...</li>");
       } else {
-      for (var i = 0; i<d.events.length; i++) {
+      for (var i = 0; i<d.resultsPage.results.event.length; i++) {
         msg += "<li>"
-        msg += "<h3>" + d.events[i].datetime_local.slice(0,10) + "</h3>";
-        msg += "<h2>" + d.events[i].title + "</h2>";
-        msg += "<h3>Average price $" + d.events[i].stats.average_price;
-        msg += " <a href=" + d.events[i].url + " target=_blank>Buy now</a>" + "</h3>";
+        msg += "<h3>" + d.resultsPage.results.event[i].location.city + "</h3>";
+        msg += "<h3>" + d.resultsPage.results.event[i].start.date + "</h3>";
+        msg += "<h2>" + d.resultsPage.results.event[i].displayName + "</h2>";
+        msg += "<a href=" + d.resultsPage.results.event[i].uri + " target=_blank><button class=downloadButton>Buy now</button></a>";
         msg += "</li>";
         };
         $("#showList").html(msg);
@@ -427,7 +434,7 @@ $("#hideMenu").click(function() {
 
 //Testing songkick API
 $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[2].artist + "&jsoncallback=?", function(d) {
-  console.log(d);
+  console.log(d.resultsPage.results.event["0"].displayName);
 });
 
 // $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[1].SevenDigitalId + "&country=ww&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
