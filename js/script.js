@@ -8,10 +8,6 @@ songs[3] = new song ("Fort Romeau","Saku", "H0iKVNwpk8Y", "http://scontent.cdnin
 songs[4] = new song ("Shit Robot","OB-8", "yrPZRtHpDjY", "http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg" );
 songs[songNum].changeEvents();
 
-
-// songs[songNum].changeRelated();
-
-
 // Loads initial song to be played 
 function onYouTubeIframeAPIReady() {
   player = new YT.Player('player', {
@@ -22,6 +18,7 @@ function onYouTubeIframeAPIReady() {
         setSpotifyId();
         setDiscogsId();
         setSevenDigitalId();
+        setSongKickId();
         songs[songNum].changeEvents();
         songs[songNum].changeRelated();
         songs[songNum].getBio();
@@ -85,19 +82,9 @@ $('#main').css('min-height', screenHeight);
 // $("#iconMenu ul").css('margin-top', screenHeight/2);
 // $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
-
 var spotifyApi = new SpotifyWebApi();
 var artistId = songs[songNum].spotifyId;
 var audio = $('#spotifyPlayer');
-
-// $('.preview').on('click.toggle', function (e) {
-//     if (!audio.paused) {
-//         audio.pause();
-//     } else {
-//         audio.play();
-//     }
-//     $(this).toggleClass('paused');
-//  });
 
 // Plays Spotify preview of related artists when play button next to artist name is clicked
 // If spotify preview is currently playing, pause it
@@ -133,61 +120,6 @@ $("#related").click(function(e) {
     audio[0].pause();
 }});
 
-
-
-// $("#related").click(function(e) {
-//   var theTarget = $(e.target);
-//   var artistId = theTarget.attr("id");
-//   console.log(artistId);
-//   console.log(theTarget);
-//   console.log('from related');
-//   if ($("audio").paused) {
-//     theTarget.attr('src', "img/play.png")
-//     audio[0].pause();
-//   } else {
-//     theTarget.attr('src', "img/pause.png")
-    // spotifyApi.getArtistTopTracks(artistId, 'US', 
-    // function(err, d){
-    //   var previewUrl = d.tracks[0].preview_url;
-    //   audio.attr("src",previewUrl);
-    //   player.pauseVideo();
-    //   audio[0].play();
-//   })}
-  
-// });
-
-
-// loadTrack = function(artistId) {
-//   console.log('from loadTrack');
-//   spotifyApi.getArtistTopTracks(artistId, 'US', 
-//     function(err, d){
-//       var previewUrl = d.tracks[0].preview_url;
-//       audio.attr("src",previewUrl);
-//       player.pauseVideo();
-//       audio[0].play();
-      // if (vidPlayerState === 1) {
-      //   pauseButton.animate({
-      //   opacity: "toggle"}, 450, function() {
-      //     $(this).hide().fadeOut(function() {
-      //       playButton.show();
-      //     });
-      //   });
-      // }
-
-//         // var albumArt = d.tracks[0].album.images[0].url;
-//         // $("body").css("backgroundImage","url('" + albumArt + "')");
-//       })
-// };
-
-// pauseTrack = function(e) {
-//   audio[0].pause();
-//   pauseButton.animate({
-//       opacity: "toggle"}, 450, function() {
-//         $(this).hide().fadeOut(function() {
-//           playButton.show();
-//         });
-//       });
-// }
 setSeatgeekId = function() {
   for (var i=0; i<songs.length; i++) {
     $.ajax({
@@ -224,17 +156,27 @@ setDiscogsId = function() {
   }
 };
 
-// setBlitzrId = function() {
-//   for (var i=0; i<songs.length; i++) {
-//     $.ajax({
-//       url: "https://api.blitzr.com/search/artist/?key=7f643b85049c768c1727dbeaf587f824&query=" + songs[i].artist + "&limit=10&start=0",
-//       async: false,
-//       success: function(d) {
-//         songs[i].blitzrId = d[0].uuid;
-//       }
-//     }) 
-//   }
-// };
+var kickIds = [];
+setSongKickId = function() {
+  for (var i=0; i<songs.length; i++) {
+    $.ajax({
+      url: "https://api.songkick.com/api/3.0/search/artists.json?query=" + songs[i].artist + "&apikey=y2QamR9aQjPzpsYs&jsoncallback=?",
+      async: false,
+      dataType: "JSONP",
+      success: function(d) {
+        // console.log(d.resultsPage.results.artist[0].id);
+        var result = d.resultsPage.results.artist[0].id;
+        // console.log(songs[i].artist);
+        kickIds.push(result);
+        // console.log(kickIds);
+      }
+    }).then(function() {
+      for (var i=0; i<songs.length; i++) {
+        songs[i].songKickId = kickIds[i];
+      }
+    }); 
+  }
+};
 
 setSevenDigitalId = function() {
   for (var i=0; i<songs.length; i++) {
@@ -311,7 +253,6 @@ function song (artist, title, youtubeId, bgImage) {
     this.changePurchases = function () {
     $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[songNum].sevenDigitalId + "&country=ww&imageSize=350&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
           var msg = '';
-          console.log(d);
           for (var i=0; i<d.length || i<3; i++) {
               
               msg += "<li>"
@@ -484,10 +425,10 @@ $("#hideMenu").click(function() {
 
 // http://api.mndigital.com/?method=search.gettracks&title=Come%20As%20You%20Are&artist=Nirvana
 
-//Testing medianet API
-// $.get("http://api.mndigital.com/?method=search.gettracks&artist=" + songs[0].artist + "&includeExplicit=true&page=1&pageSize=1&apiKey=kCvqrddKxR6OIMKhCE1nPo6KQ&format=json", function(d) {
-//   console.log(d);
-// });
+//Testing songkick API
+$.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[2].artist + "&jsoncallback=?", function(d) {
+  console.log(d);
+});
 
 // $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[1].SevenDigitalId + "&country=ww&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
 //   console.log(d);
@@ -499,3 +440,4 @@ $("#hideMenu").click(function() {
 // http://api.7digital.com/1.2/artist/search?q=pink&sort=score%20desc&country=US&oauth_consumer_key=YOUR_KEY_HERE&pagesize=2 
 
 // &oauth_consumer_key=7dyu4vag3h4k
+
