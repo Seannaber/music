@@ -165,11 +165,15 @@ html, body {
 	padding: 0px 50px;
 }
 
+#iconMenu ul {
+	padding-bottom: 50px;
+}
+
 #iconMenu  {
 	width: 100%;
 	margin: 0 auto;
 	position: absolute;
-	bottom: 50px;
+	bottom: -3px;
 	z-index: 100;
 }
 
@@ -224,7 +228,7 @@ canvas {
 	z-index: 50;
 }
 
-#related, #shows {
+#related, #shows, #buy, #stats {
 	font-size: 3em;
 	color: white;
 	list-style-type: none;
@@ -232,6 +236,59 @@ canvas {
 	background-color: rgba(0,0,0,.55);
 	/*max-width: 70%;*/
 	margin: 0px auto 0px auto;
+}
+
+#related h1, #shows h1, #buy h1, #stats h1 {
+	margin-top: 75px;
+}
+
+#iconMenu a {
+	font-size: 1em;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+}
+
+#toPage2 {
+	margin-top: 50px;
+	background-color: rgba(0,0,0,.55);
+	width: 100%;
+}
+
+/*#toPage3 {
+	position: absolute;
+	bottom: 0px;
+	font-size: 3em;
+	width: 100%;
+}*/
+
+.navArrows {
+	color: white;
+	font-size: 5em;
+/*	position: absolute;
+	bottom: 0px;*/
+}
+
+.navArrowsTop {
+	color: white;
+	font-size: 2em;
+/*	position: absolute;
+	bottom: 0px;*/
+}
+
+.navArrowsBottom {
+	color: white;
+	font-size: 2em;
+/*	position: absolute;
+	bottom: 0px;*/
+}
+
+#buyList img {
+	float: left;
+	width: 250px;
+}
+
+#buy ul {
+	width: 75%;
 }
 
 #relatedList, #showList {
@@ -289,10 +346,14 @@ audio {
 .mobileMenu {
 	color: white;
 	font-size: 4em;
-	float: right;
-	margin-right: 55px;
-	margin-top: -430px;
+/*	float: left;*/
+/*	margin-left: 55px;
+	margin-top: 55px;*/
 	opacity: .50;
+	position: absolute;
+	top: 55px;
+	left: 55px;
+
 }
 
 #menu {

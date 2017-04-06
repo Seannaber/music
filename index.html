@@ -14,9 +14,8 @@
 	<div class="main text-center">
 		<div id="wrapper">
 			<section id="main" class="text-center">
+				<span class="mobileMenu glyphicon glyphicon-align-left"></span>
 				<h1 class="logo">beech.fm</h1>
-			<span class="mobileMenu glyphicon glyphicon-align-left"></span>
-			
 				<div id="songName"></div>
 				<div class="row text-center">
 					<div class="col-xs-1"></div>
@@ -39,19 +38,34 @@
 						<li id="viewVid"><span class="icons glyphicon glyphicon-eye-open"></span></li>
 						<li id="info"><span class="icons glyphicon glyphicon-info-sign"></span></li>
 					</ul>
-					<a data-index="2" href="#2"><span id="toPage2" class="icons glyphicon glyphicon-menu-down"></span></a>
+					<a data-index=2 href="#2"><span class="navArrows glyphicon glyphicon-chevron-down" onclick="toPage(2)"></span></a>
 				</div>
 			</section>
 			
 			<section id="related" class="text-center">
-				<h1>Related Artists</h1>
+				<a data-index=1 href="#1"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(1)"></span></a>
+				<h1>Discover Similar Artists</h1>
 				<ul id="relatedList">Loading...</ul>
-				<a data-index="2" href="#shows"><span class="icons glyphicon glyphicon-menu-down"></span></a>
+				<a data-index=3 href="#3"><span class="navArrowsBottom glyphicon glyphicon-chevron-down" onclick="toPage(3)"></span></a>
+			</section>
+			<section id="buy" class="text-center">
+				<a data-index=2 href="#2"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(2)"></span></a>
+				<h1>Like it? Buy it.</h1>
+				<ul id="buyList">Loading...</ul>
+				<a data-index=4 href="#4"><span class="navArrowsBottom glyphicon glyphicon-chevron-down" onclick="toPage(4)"></span></a>
 			</section>
 			<section id="shows" class="text-center">
-				<h1>Upcoming Shows</h1>
+				<a data-index=3 href="#3"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(3)"></span></a>
+				<h1>See Them Live</h1>
 				<ul id="showList">Loading...</ul>
+				<a data-index=5 href="#5"><span class="navArrowsBottom glyphicon glyphicon-chevron-down" onclick="toPage(5)"></span></a>
 			</section>
+			<section id="stats" class="text-center">
+				<a data-index=4 href="#4"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(4)"></span></a>
+				<h1>Artist Stats</h1>
+				<ul id="statList">Loading...</ul>
+			</section>
+		
 			<audio id="spotifyPlayer" controls>
 			    <source src="" 
 			    type='audio/mpeg'>

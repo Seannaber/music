@@ -18,10 +18,14 @@ function onYouTubeIframeAPIReady() {
     videoId: songs[songNum].youtubeId,
     events: {
       'onReady': function() {
-        songs[songNum].changeEvents();
-        songs[songNum].changeRelated();
         setSeatgeekId();
         setSpotifyId();
+        setDiscogsId();
+        setBlitzrId();
+        songs[songNum].changeEvents();
+        songs[songNum].changeRelated();
+        songs[songNum].getBio();
+        songs[songNum].changePurchases();
       },
       'onStateChange': function(e) {
         updateBar();
@@ -97,27 +101,25 @@ var audio = $('#spotifyPlayer');
 
 // Plays Spotify preview of related artists when play button next to artist name is clicked
 // If spotify preview is currently playing, pause it
-// $("#related").click(function(e) {
-//   var theTarget = $(e.target);
-//   console.log(theTarget);
-//   if (!audio.paused) {
-//     theTarget.attr('src', "img/pause.png")
-//     audio[0].pause();
-//   } else {
-//     theTarget.attr('src', "img/play.png")
-//     audio.play();
-//   }
-  
-// });
-
-loadTrack = function(artistId) {
-  spotifyApi.getArtistTopTracks(artistId, 'US', 
-    function(err, d){
-      var previewUrl = d.tracks[0].preview_url;
-      audio.attr("src",previewUrl);
-      player.pauseVideo();
-      audio[0].play();
-      if (vidPlayerState === 1) {
+$("#related").click(function(e) {
+  var theTarget = $(e.target);
+  var artistId = theTarget.attr("id");
+  console.log(theTarget);
+  if (theTarget.attr("src") === "img/play.png") {
+    theTarget.attr("src","img/pause.png");
+    spotifyApi.getArtistTopTracks(artistId, 'US', 
+      function(err, d){
+        var previewUrl = d.tracks[0].preview_url;
+        audio.attr("src",previewUrl);
+        player.pauseVideo();
+        audio[0].play();
+        var playButtons = $("#related img");
+        playButtons.each(function(i) {
+          if ($(this).attr("id") !== artistId) {
+            $(this).attr("src","img/play.png");
+          }
+        });
+        if (vidPlayerState === 1) {
         pauseButton.animate({
         opacity: "toggle"}, 450, function() {
           $(this).hide().fadeOut(function() {
@@ -125,11 +127,57 @@ loadTrack = function(artistId) {
           });
         });
       }
+      });
+  } else {
+    theTarget.attr("src","img/play.png");
+    audio[0].pause();
+}});
 
-        // var albumArt = d.tracks[0].album.images[0].url;
-        // $("body").css("backgroundImage","url('" + albumArt + "')");
-      })
-};
+
+
+// $("#related").click(function(e) {
+//   var theTarget = $(e.target);
+//   var artistId = theTarget.attr("id");
+//   console.log(artistId);
+//   console.log(theTarget);
+//   console.log('from related');
+//   if ($("audio").paused) {
+//     theTarget.attr('src', "img/play.png")
+//     audio[0].pause();
+//   } else {
+//     theTarget.attr('src', "img/pause.png")
+    // spotifyApi.getArtistTopTracks(artistId, 'US', 
+    // function(err, d){
+    //   var previewUrl = d.tracks[0].preview_url;
+    //   audio.attr("src",previewUrl);
+    //   player.pauseVideo();
+    //   audio[0].play();
+//   })}
+  
+// });
+
+
+// loadTrack = function(artistId) {
+//   console.log('from loadTrack');
+//   spotifyApi.getArtistTopTracks(artistId, 'US', 
+//     function(err, d){
+//       var previewUrl = d.tracks[0].preview_url;
+//       audio.attr("src",previewUrl);
+//       player.pauseVideo();
+//       audio[0].play();
+      // if (vidPlayerState === 1) {
+      //   pauseButton.animate({
+      //   opacity: "toggle"}, 450, function() {
+      //     $(this).hide().fadeOut(function() {
+      //       playButton.show();
+      //     });
+      //   });
+      // }
+
+//         // var albumArt = d.tracks[0].album.images[0].url;
+//         // $("body").css("backgroundImage","url('" + albumArt + "')");
+//       })
+// };
 
 // pauseTrack = function(e) {
 //   audio[0].pause();
@@ -164,6 +212,29 @@ setSpotifyId = function() {
   }
 };
 
+setDiscogsId = function() {
+  for (var i=0; i<songs.length; i++) {
+    $.ajax({
+      url: "https://api.discogs.com/database/search?q=" + songs[i].artist + "&key=aZOluklbWLHcZCDcXMUt&secret=WphUDuSHgaomOzAiUmGBxUVwhRAXjnaR",
+      async: false,
+      success: function(d) {
+        songs[i].discogsId = d.results[0].id;
+      }
+    }) 
+  }
+};
+
+setBlitzrId = function() {
+  for (var i=0; i<songs.length; i++) {
+    $.ajax({
+      url: "https://api.blitzr.com/search/artist/?key=7f643b85049c768c1727dbeaf587f824&query=" + songs[i].artist + "&limit=10&start=0",
+      async: false,
+      success: function(d) {
+        songs[i].blitzrId = d[0].uuid;
+      }
+    }) 
+  }
+};
 
 var shows = $("#showList");
 var msg = "";
@@ -177,6 +248,7 @@ function song (artist, title, youtubeId, bgImage) {
   this.youtubeId = youtubeId,
   this.spotifyId = "",
   this.seatgeekId = "",
+  this.discogsId = "",
   // on song change, updates background
   this.changeBg = function (songNum) {
     $("body").attr("class",songNum);
@@ -189,7 +261,7 @@ function song (artist, title, youtubeId, bgImage) {
       function(err, d){
         var relatedArtists = d.artists;
         for (var i=0;i<15;i++) {
-            $("#relatedList").append("<li>" + relatedArtists[i].name + "<img src=img/play.png class=preview onclick=\"loadTrack('" + relatedArtists[i].id + "')\"></li>");
+            $("#relatedList").append("<li>" + relatedArtists[i].name + "<img src=img/play.png class=preview id=" + relatedArtists[i].id + "></li>");
           };
       })
   },
@@ -211,7 +283,36 @@ function song (artist, title, youtubeId, bgImage) {
         };
         $("#showList").html(msg);
       }
-})}
+})},
+    this.getBio = function () {
+      $.get("https://api.discogs.com/artists/" + songs[songNum].discogsId, function(d) { 
+        $("#bioText").html(d.profile);
+      })},
+      this.updateAll = function () {
+        this.changeBg(songNum);
+        this.changeRelated();
+        this.changeEvents();
+        this.getBio();
+  },
+  this.changePurchases = function () {
+    $.get("https://api.blitzr.com/buy/artist/mp3/?key=7f643b85049c768c1727dbeaf587f824&uuid=" + songs[songNum].blitzrId, function(d) {
+          var msg = '';
+          console.log(d);
+          for (var i=0; i<d.length || i<5; i++) {
+            if (d[i].provider === "amazonMP3") {
+              msg += "<li>"
+              msg += "<img src=" + d[i].img_url + "></img>";
+              msg += "<h1>" + songs[songNum].artist + "</h1>";
+              msg += "<h2>" + d[i].name + "</h2>";
+              msg += "<h3>Provider:" + d[i].provider + "</h3>";
+              msg += "<a href=" + d[i].shop_url + " target=_blank><button>Buy now</button></a>";
+              msg += "</li>";
+            };
+          };
+          $("#buyList").html(msg);
+
+});
+  }
   
 }
 
@@ -226,12 +327,16 @@ function nextSong() {
     songs[songNum].changeBg("song" + songNum);
     songs[songNum].changeRelated();
     songs[songNum].changeEvents();
+    songs[songNum].getBio();
+    songs[songNum].changePurchases();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
     player.loadVideoById(songs[songNum].youtubeId);
     songs[songNum].changeBg("song" + songNum);
     songs[songNum].changeRelated();
     songs[songNum].changeEvents();
+    songs[songNum].getBio();
+    songs[songNum].changePurchases();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
 }
@@ -245,6 +350,8 @@ function prevSong() {
     songs[songNum].changeBg("song" + songNum);
     songs[songNum].changeRelated();
     songs[songNum].changeEvents();
+    songs[songNum].getBio();
+    songs[songNum].changePurchases();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
     songNum -= 1;
@@ -252,6 +359,8 @@ function prevSong() {
     songs[songNum].changeBg("song" + songNum);
     songs[songNum].changeRelated();
     songs[songNum].changeEvents();
+    songs[songNum].getBio();
+    songs[songNum].changePurchases();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
 }
@@ -284,6 +393,12 @@ $("#iconMenu ul li").click(function(e) {
       break;
   }
 });
+
+toPage = function(num) {
+  $("body").removeClass("viewing-page-" + (num - 1));
+  $("body").addClass("viewing-page-" + num);
+  $("this").moveTo(num);
+};
 
 $(".main").onepage_scroll({
    sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
@@ -342,8 +457,18 @@ $("#hideMenu").click(function() {
 //   console.log(d);
 // });
 
-// Testing Blitzr API
-// $.get("https://api.blitzr.com/radio/artist/?uuid=spotify:1jBkXf5NwyxgbUw9fWxAOE&key=7f643b85049c768c1727dbeaf587f824", function(d) {
+//Testing Blitzr API
+// $.get("https://api.blitzr.com/buy/artist/mp3/?key=7f643b85049c768c1727dbeaf587f824&uuid=ARv88shncZqW3pWVVi", function(d) {
 //   console.log(d);
 // });
+
+// $.get("https://api.blitzr.com/search/artist/?key=7f643b85049c768c1727dbeaf587f824&query=" + songs[0].artist + "&limit=10&start=0", function(d) {
+//   console.log(d[0].uuid);
+// });
+
+//Testing MusicGraph API
+// $.get("http://api.musicgraph.com/api/v2/artist/420df292-3005-2df6-8346-40adf5415964/metrics?api_key=a1f90e8c4b96ff2812961f6a9b815e1c", function(d) {
+//   console.log(d);
+// });
+
 
