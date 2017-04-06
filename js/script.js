@@ -21,7 +21,7 @@ function onYouTubeIframeAPIReady() {
         setSeatgeekId();
         setSpotifyId();
         setDiscogsId();
-        setBlitzrId();
+        setSevenDigitalId();
         songs[songNum].changeEvents();
         songs[songNum].changeRelated();
         songs[songNum].getBio();
@@ -224,17 +224,31 @@ setDiscogsId = function() {
   }
 };
 
-setBlitzrId = function() {
+// setBlitzrId = function() {
+//   for (var i=0; i<songs.length; i++) {
+//     $.ajax({
+//       url: "https://api.blitzr.com/search/artist/?key=7f643b85049c768c1727dbeaf587f824&query=" + songs[i].artist + "&limit=10&start=0",
+//       async: false,
+//       success: function(d) {
+//         songs[i].blitzrId = d[0].uuid;
+//       }
+//     }) 
+//   }
+// };
+
+setSevenDigitalId = function() {
   for (var i=0; i<songs.length; i++) {
     $.ajax({
-      url: "https://api.blitzr.com/search/artist/?key=7f643b85049c768c1727dbeaf587f824&query=" + songs[i].artist + "&limit=10&start=0",
+      url: "http://api.7digital.com/1.2/artist/search?q=" + songs[i].artist + "&sort=score%20desc&country=ww&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5",
       async: false,
+      dataType: "json",
       success: function(d) {
-        songs[i].blitzrId = d[0].uuid;
+        songs[i].sevenDigitalId = d.searchResults.searchResult["0"].artist.id;
       }
     }) 
   }
 };
+
 
 var shows = $("#showList");
 var msg = "";
@@ -260,7 +274,7 @@ function song (artist, title, youtubeId, bgImage) {
     spotifyApi.getArtistRelatedArtists(artistId, 
       function(err, d){
         var relatedArtists = d.artists;
-        for (var i=0;i<15;i++) {
+        for (var i=0;i<11;i++) {
             $("#relatedList").append("<li>" + relatedArtists[i].name + "<img src=img/play.png class=preview id=" + relatedArtists[i].id + "></li>");
           };
       })
@@ -294,26 +308,23 @@ function song (artist, title, youtubeId, bgImage) {
         this.changeEvents();
         this.getBio();
   },
-  this.changePurchases = function () {
-    $.get("https://api.blitzr.com/buy/artist/mp3/?key=7f643b85049c768c1727dbeaf587f824&uuid=" + songs[songNum].blitzrId, function(d) {
+    this.changePurchases = function () {
+    $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[songNum].sevenDigitalId + "&country=ww&imageSize=350&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
           var msg = '';
           console.log(d);
-          for (var i=0; i<d.length || i<5; i++) {
-            if (d[i].provider === "amazonMP3") {
+          for (var i=0; i<d.length || i<3; i++) {
+              
               msg += "<li>"
-              msg += "<img src=" + d[i].img_url + "></img>";
+              msg += "<img src=" + d.releases.releases[i].image + "></img>";
               msg += "<h1>" + songs[songNum].artist + "</h1>";
-              msg += "<h2>" + d[i].name + "</h2>";
-              msg += "<h3>Provider:" + d[i].provider + "</h3>";
-              msg += "<a href=" + d[i].shop_url + " target=_blank><button>Buy now</button></a>";
+              msg += "<h2>" + d.releases.releases[i].title + "</h2>";
+              msg += "<a href=" + d.releases.releases[i].url + " target=_blank><button class=downloadButton><span class='glyphicon glyphicon-cloud-download'></span> " + d.releases.releases[i].price.formattedPrice + "</button></a>";
               msg += "</li>";
-            };
           };
           $("#buyList").html(msg);
 
 });
   }
-  
 }
 
 // moves to next song in songs array
@@ -471,4 +482,20 @@ $("#hideMenu").click(function() {
 //   console.log(d);
 // });
 
+// http://api.mndigital.com/?method=search.gettracks&title=Come%20As%20You%20Are&artist=Nirvana
 
+//Testing medianet API
+// $.get("http://api.mndigital.com/?method=search.gettracks&artist=" + songs[0].artist + "&includeExplicit=true&page=1&pageSize=1&apiKey=kCvqrddKxR6OIMKhCE1nPo6KQ&format=json", function(d) {
+//   console.log(d);
+// });
+
+// $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[1].SevenDigitalId + "&country=ww&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
+//   console.log(d);
+//   console.log(songs[1].SevenDigitalId);
+// });
+
+// http://api.7digital.com/1.2/artist/releases?artistid=1&oauth_consumer_key=YOUR_KEY_HERE&country=GB&pagesize=2&usageTypes=download,subscriptionstreaming,adsupportedstreaming
+
+// http://api.7digital.com/1.2/artist/search?q=pink&sort=score%20desc&country=US&oauth_consumer_key=YOUR_KEY_HERE&pagesize=2 
+
+// &oauth_consumer_key=7dyu4vag3h4k

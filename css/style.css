@@ -284,11 +284,54 @@ canvas {
 
 #buyList img {
 	float: left;
-	width: 250px;
+	width: 350px;
+	margin-right: 45px;
+}
+
+#buyList h1 {
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	font-size: 1.25em;
+	margin: -20px 0px 0px 0px;
+}
+
+#buyList h2 {
+	font-family: 'Raleway', sans-serif;
+	font-size: 1em;
+	line-height: 1em;
+
+}
+
+#buyList li {
+	margin-bottom: 120px;
+	list-style: none;
+}
+
+.downloadButton {
+	font-size: 1.25em;
+	color: white;
+	padding: 25px;
+	background-color: rgba(100,100,100,0);
+	border: 2px solid white;
+	border-radius: 5%;
 }
 
 #buy ul {
 	width: 75%;
+	text-align: left;
+	margin: 100px auto;
+}
+
+#buy h1 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.price {
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	font-size: 1.25em;
+	color: green;
 }
 
 #relatedList, #showList {
