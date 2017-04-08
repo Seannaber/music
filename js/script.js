@@ -16,7 +16,7 @@ function onYouTubeIframeAPIReady() {
       'onReady': function() {
         setSeatgeekId();
         setSpotifyId();
-        setDiscogsId();
+        // setDiscogsId();
         setSevenDigitalId();
         setSongKickId();
         songs[songNum].changeEvents();
@@ -43,6 +43,38 @@ function onPlayerStateChange(e) {
 }
 
 // Fires when play button is clicked
+var playButtonMini = $("#play-button-mini");
+playButtonMini.on("click", function() {
+  audio[0].pause();
+  player.playVideo();
+  $(this).animate({
+    opacity: "toggle"}, 450, function() {
+      $(this).hide().fadeOut(function() {
+        playButton.hide();
+        pauseButton.show();
+        pauseButtonMini.show();
+      });
+    });
+});
+
+// Fires when pause button is clicked  
+var pauseButtonMini = $("#pause-button-mini");
+// pauseButton.hide();
+pauseButtonMini.on("click", function() {
+  audio[0].pause();
+  player.pauseVideo();
+  $(this).animate({
+    // height: 400,
+    opacity: "toggle"}, 450, function() {
+      $(this).hide().fadeOut(function() {
+        pauseButton.hide();
+        playButton.show();
+        playButtonMini.show()
+      });
+    });
+});
+
+// Fires when mini play button is clicked
 var playButton = $("#play-button");
 playButton.on("click", function() {
   audio[0].pause();
@@ -50,12 +82,14 @@ playButton.on("click", function() {
   $(this).animate({
     opacity: "toggle"}, 450, function() {
       $(this).hide().fadeOut(function() {
+        playButtonMini.hide();
+        pauseButtonMini.show();
         pauseButton.show();
       });
     });
 });
 
-// Fires when pause button is clicked  
+// Fires when mini pause button is clicked  
 var pauseButton = $("#pause-button");
 // pauseButton.hide();
 pauseButton.on("click", function() {
@@ -65,6 +99,8 @@ pauseButton.on("click", function() {
     // height: 400,
     opacity: "toggle"}, 450, function() {
       $(this).hide().fadeOut(function() {
+        pauseButtonMini.hide();
+        playButtonMini.show();
         playButton.show();
       });
     });
@@ -73,6 +109,8 @@ pauseButton.on("click", function() {
 // Hides youtube video and html5 player
 $("#player").hide();
 $("audio").hide();
+$("#miniPlayer").hide();
+pauseButtonMini.hide();
 
 // Obtains screen height and makes CSS adjustments
 var screenHeight = screen.height;
@@ -100,7 +138,7 @@ $("#related").click(function(e) {
         audio.attr("src",previewUrl);
         player.pauseVideo();
         audio[0].play();
-        var playButtons = $("#related img");
+        var playButtons = $("#related img.preview");
         playButtons.each(function(i) {
           if ($(this).attr("id") !== artistId) {
             $(this).attr("src","img/play.png");
@@ -115,7 +153,7 @@ $("#related").click(function(e) {
         });
       }
       });
-  } else {
+  } else if (artistId.length > 0) {
     theTarget.attr("src","img/play.png");
     audio[0].pause();
 }});
@@ -144,17 +182,17 @@ setSpotifyId = function() {
   }
 };
 
-setDiscogsId = function() {
-  for (var i=0; i<songs.length; i++) {
-    $.ajax({
-      url: "https://api.discogs.com/database/search?q=" + songs[i].artist + "&key=aZOluklbWLHcZCDcXMUt&secret=WphUDuSHgaomOzAiUmGBxUVwhRAXjnaR",
-      async: false,
-      success: function(d) {
-        songs[i].discogsId = d.results[0].id;
-      }
-    }) 
-  }
-};
+// setDiscogsId = function() {
+//   for (var i=0; i<songs.length; i++) {
+//     $.ajax({
+//       url: "https://api.discogs.com/database/search?q=" + songs[i].artist + "&key=aZOluklbWLHcZCDcXMUt&secret=WphUDuSHgaomOzAiUmGBxUVwhRAXjnaR",
+//       async: false,
+//       success: function(d) {
+//         songs[i].discogsId = d.results[0].id;
+//       }
+//     }) 
+//   }
+// };
 
 var kickIds = [];
 setSongKickId = function() {
@@ -204,7 +242,7 @@ function song (artist, title, youtubeId, bgImage) {
   this.youtubeId = youtubeId,
   this.spotifyId = "",
   this.seatgeekId = "",
-  this.discogsId = "",
+  // this.discogsId = "",
   // on song change, updates background
   this.changeBg = function (songNum) {
     $("body").attr("class",songNum);
@@ -215,11 +253,15 @@ function song (artist, title, youtubeId, bgImage) {
     $("#relatedList").text('');
     spotifyApi.getArtistRelatedArtists(artistId, 
       function(err, d){
+        console.log(d);
         var relatedArtists = d.artists;
-        for (var i=0;i<11;i++) {
-            $("#relatedList").append("<li>" + relatedArtists[i].name + "<img src=img/play.png class=preview id=" + relatedArtists[i].id + "></li>");
+        for (var i=0;i<5;i++) {
+            $("#relatedList").append("<li><img height=100 src=" + d.artists[i].images[0].url + ">" + relatedArtists[i].name + "<img src=img/play.png class=preview id=" + relatedArtists[i].id + "></li>");
           };
       })
+    // var relatedHeight = $("#relatedList").height();
+    // console.log(relatedHeight);
+    // $("#relatedList").css("margin-top",(screen.height/3));
   },
 
 
@@ -233,23 +275,23 @@ function song (artist, title, youtubeId, bgImage) {
       var msg = '';
       $("#showList").html(msg);
       console.log(d);
-      if (d.resultsPage.length === 0) {
-        $("#showList").html("<li>No upcoming performances...</li>");
+      if (d.resultsPage.totalEntries === 0) {
+        $("#showList").html("<li>Sorry, this artist has no upcoming performances.</li>");
       } else {
-      for (var i = 0; i<d.resultsPage.results.event.length; i++) {
+      for (var i = 0; i<2; i++) {
         msg += "<li>"
-        msg += "<h3>" + d.resultsPage.results.event[i].location.city + "</h3>";
-        msg += "<h3>" + d.resultsPage.results.event[i].start.date + "</h3>";
+        msg += "<h1>" + d.resultsPage.results.event[i].location.city + "</h1>";
+        msg += "<h2>" + d.resultsPage.results.event[i].start.date + "</h2>";
         msg += "<h2>" + d.resultsPage.results.event[i].displayName + "</h2>";
-        msg += "<a href=" + d.resultsPage.results.event[i].uri + " target=_blank><button class=downloadButton>Buy now</button></a>";
+        msg += "<a href=" + d.resultsPage.results.event[i].uri + " target=_blank><button class=downloadButton><span class='glyphicon glyphicon-info-sign'></span> More info</button></a>";
         msg += "</li>";
         };
         $("#showList").html(msg);
       }
 })},
     this.getBio = function () {
-      $.get("https://api.discogs.com/artists/" + songs[songNum].discogsId, function(d) { 
-        $("#bioText").html(d.profile);
+      $.get("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + songs[songNum].artist + "&api_key=ef4bf194f0542ed37c6d13c45aa93b0f&format=json", function(d) { 
+        $("#bioText").html(d.artist.bio.content);
       })},
       this.updateAll = function () {
         this.changeBg(songNum);
@@ -258,7 +300,7 @@ function song (artist, title, youtubeId, bgImage) {
         this.getBio();
   },
     this.changePurchases = function () {
-    $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[songNum].sevenDigitalId + "&country=ww&imageSize=350&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
+    $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[songNum].sevenDigitalId + "&country=ww&imageSize=350&type=album&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
           var msg = '';
           for (var i=0; i<d.length || i<3; i++) {
               
@@ -357,6 +399,11 @@ toPage = function(num) {
   $("body").removeClass("viewing-page-" + (num - 1));
   $("body").addClass("viewing-page-" + num);
   $("this").moveTo(num);
+  if (num > 1) {
+    $("#miniPlayer").show();
+  } else {
+    $("#miniPlayer").hide()
+  }
 };
 
 $(".main").onepage_scroll({
@@ -382,6 +429,12 @@ $("#hideBio").click(function() {
   $("#bio, #hideBio").toggle();
 });
 
+showBio = function() {
+  $("#menu").css('right', '105%');
+  $(".main").css('left', '0%');
+  $("#bio, #hideBio").toggle();
+}
+
 $("#hideVid").hide();
 $("#hideVid").click(function() {
   $("#player, #hideVid").toggle();
@@ -401,6 +454,15 @@ $("#hideMenu").click(function() {
   $("#menu").css('right', '105%');
   $(".main").css('left', '0%');
 });
+
+$("#menu").click(function(e) {
+  console.log(e);
+  if (e.target.id) {
+    $("#menu").css('right', '105%');
+    $(".main").css('left', '0%');
+    toPage(e.target.id).delay(1000);
+    
+}});
 
 
 
@@ -433,9 +495,9 @@ $("#hideMenu").click(function() {
 // http://api.mndigital.com/?method=search.gettracks&title=Come%20As%20You%20Are&artist=Nirvana
 
 //Testing songkick API
-$.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[2].artist + "&jsoncallback=?", function(d) {
-  console.log(d.resultsPage.results.event["0"].displayName);
-});
+// $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[2].artist + "&jsoncallback=?", function(d) {
+//   console.log(d.resultsPage.results.event["0"].displayName);
+// });
 
 // $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[1].SevenDigitalId + "&country=ww&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
 //   console.log(d);
@@ -448,3 +510,15 @@ $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&a
 
 // &oauth_consumer_key=7dyu4vag3h4k
 
+// $.ajax({
+//       url: "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=maceo%20plex&api_key=ef4bf194f0542ed37c6d13c45aa93b0f&format=json",
+//       async: false,
+//       success: function(d) {
+//         console.log(d);
+//       }
+//     }) 
+
+// spotifyApi.getArtist('3TXQ1ddouwQAI78hV4hXDj', 
+//       function(d){
+//         console.log(d);
+// });

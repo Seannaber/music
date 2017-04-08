@@ -46,6 +46,7 @@
 				<a data-index=1 href="#1"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(1)"></span></a>
 				<h1>Discover Similar Artists</h1>
 				<ul id="relatedList">Loading...</ul>
+				<img src="img/spotify.png" width="300">
 				<a data-index=3 href="#3"><span class="navArrowsBottom glyphicon glyphicon-chevron-down" onclick="toPage(3)"></span></a>
 			</section>
 			<section id="buy" class="text-center">
@@ -57,14 +58,18 @@
 			<section id="shows" class="text-center">
 				<a data-index=3 href="#3"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(3)"></span></a>
 				<h1>See Them Live</h1>
+
 				<ul id="showList">Loading...</ul>
+				<img src="img/songkick.svg" height="100">
 				<a data-index=5 href="#5"><span class="navArrowsBottom glyphicon glyphicon-chevron-down" onclick="toPage(5)"></span></a>
 			</section>
 			<section id="stats" class="text-center">
 				<a data-index=4 href="#4"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(4)"></span></a>
-				<h1>Artist Stats</h1>
+				<h1>Track Stats</h1>
 				<ul id="statList">Loading...</ul>
 			</section>
+
+			
 		
 			<audio id="spotifyPlayer" controls>
 			    <source src="" 
@@ -83,15 +88,29 @@
 	<div id="menu">
 		<ul>
 			<p>menu</p>
-			<li>Artist info</li>
-			<li>Similar artists</li>
-			<li>Upcoming events</li>
-			<li>Purchase options</li>
-			<li>Stats</li>
+			<li onclick=showBio()>Artist</br>info</li>
+			<li id="2">Similar</br>artists</li>
+			<li id="4">Upcoming</br>events</li>
+			<li id="3">Purchase</br>options</li>
+			<li id="5">Track</br>Stats</li>
 			<li>Likes</li>
 		</ul>
 	    <span id="hideMenu" class="icons glyphicon glyphicon-remove"></span>
 	</div>
+	<div id="miniPlayer" class="text-center">
+			<div id="songName"></div>
+				<div class="row text-center">
+					<div class="col-xs-1"></div>
+					<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
+					<div class="col-xs-0"></div>
+					<div class="col-xs-4">
+						<img src="img/play.png" id="play-button-mini" class="text-center">
+						<img src="img/pause.png" id="pause-button-mini" class="text-center"></div>
+					<div class="col-xs-0"></div>
+					<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
+					<div class="col-xs-1"></div>
+				</div>
+				</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script 

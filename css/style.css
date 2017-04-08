@@ -46,6 +46,23 @@ body {
 
 }
 
+#miniPlayer {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	height: 150px;
+	background: rgba(0,0,0,.55);
+	padding-top: 20px;
+}
+
+#miniPlayer img {
+	width: 100px;
+	height: 100px;
+	padding: 0px;
+	margin: 0px;
+}
+
 .active {
 	right: 50%;
 }
@@ -263,23 +280,27 @@ canvas {
 
 .navArrows {
 	color: white;
-	font-size: 5em;
+	font-size: 7em;
 /*	position: absolute;
 	bottom: 0px;*/
 }
 
 .navArrowsTop {
 	color: white;
-	font-size: 2em;
+	font-size: 2.5em;
 /*	position: absolute;
 	bottom: 0px;*/
 }
 
 .navArrowsBottom {
 	color: white;
-	font-size: 2em;
-/*	position: absolute;
-	bottom: 0px;*/
+	font-size: 2.5em;
+	position: absolute;
+	top: 85%;
+	left:45%;
+/*	right: 50%;*/
+	/*margin: 0 auto*/;
+/*	width: 100%;*/
 }
 
 #buyList img {
@@ -288,23 +309,38 @@ canvas {
 	margin-right: 45px;
 }
 
-#buyList h1 {
+#buyList h1, #showList h1 {
 	font-family: 'Raleway', sans-serif;
 	font-weight: bold;
 	font-size: 1.25em;
 	margin: -20px 0px 0px 0px;
 }
 
-#buyList h2 {
+#buyList h2, #showList h2 {
 	font-family: 'Raleway', sans-serif;
 	font-size: 1em;
 	line-height: 1em;
 
 }
 
-#buyList li {
+#showList li {
 	margin-bottom: 120px;
 	list-style: none;
+}
+
+#buyList li {
+	margin-bottom: 60px;
+	list-style: none;
+	transform: scale(.85);
+}
+
+#relatedList li {
+	margin-bottom: 50px;
+	list-style: none;
+}
+
+#relatedList li img {
+	margin-right: 20px;
 }
 
 .downloadButton {
@@ -322,7 +358,17 @@ canvas {
 	margin: 100px auto;
 }
 
-#buy h1 {
+#shows ul {
+	width: 75%;
+	margin: 100px auto;
+}
+
+#related ul {
+	width: 75%;
+	margin-bottom: 100px;
+}
+
+#buy h1, #shows h1 {
 	margin-top: 0px;
 	margin-bottom: 0px;
 }
@@ -334,11 +380,11 @@ canvas {
 	color: green;
 }
 
-#relatedList, #showList {
+#relatedList, #showList, #buyList {
 	list-style-type: none;
 }
 
-#showList li {
+#showList li, #buyList li {
 	padding-bottom: 25px;
 }
 
@@ -405,7 +451,7 @@ audio {
 	position: absolute;
 	top: 0px;
 	font-size: 3em;
-	color: black;
+	/*color: black;*/
 	list-style-type: none;
 	line-height: 2em;
 	background-color: white;
@@ -424,11 +470,16 @@ audio {
 	font-weight: bold;
 }
 
+#menu li {
+	font-size: 1.5em;
+	padding-bottom: 85px;
+}
+
 #menu p {
 	font-family: 'Raleway', sans-serif;
 	font-weight: 200;
 	font-size: 2.5em;
-	padding-bottom: 40px;
+	padding-bottom: 65px;
 }
 
 #hideMenu {
