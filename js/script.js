@@ -23,6 +23,9 @@ function onYouTubeIframeAPIReady() {
         songs[songNum].changeRelated();
         songs[songNum].getBio();
         songs[songNum].changePurchases();
+        songs[songNum].getTopTracks();
+        songs[songNum].setStats();
+        songs[songNum].drawChart();
       },
       'onStateChange': function(e) {
         updateBar();
@@ -121,6 +124,7 @@ $('#main').css('min-height', screenHeight);
 // $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 var spotifyApi = new SpotifyWebApi();
+spotifyApi.setAccessToken('BQDw9kkRkpgRgqUUEEB6g1dRwM6j2yMe2hfCIjaPVG77CiIHauVKGun3fZQF9k37pPwVDtDFb0WkuF8CgIiap_kVDLkQesYvNN4O7F3KvwM616SvKcaLOEYGWY9ETiTCsGDMZ9eLGw');
 var artistId = songs[songNum].spotifyId;
 var audio = $('#spotifyPlayer');
 
@@ -149,6 +153,12 @@ $("#related").click(function(e) {
         opacity: "toggle"}, 450, function() {
           $(this).hide().fadeOut(function() {
             playButton.show();
+          });
+        });
+        pauseButtonMini.animate({
+        opacity: "toggle"}, 450, function() {
+          $(this).hide().fadeOut(function() {
+            playButtonMini.show();
           });
         });
       }
@@ -242,6 +252,7 @@ function song (artist, title, youtubeId, bgImage) {
   this.youtubeId = youtubeId,
   this.spotifyId = "",
   this.seatgeekId = "",
+  this.danceability,
   // this.discogsId = "",
   // on song change, updates background
   this.changeBg = function (songNum) {
@@ -253,7 +264,7 @@ function song (artist, title, youtubeId, bgImage) {
     $("#relatedList").text('');
     spotifyApi.getArtistRelatedArtists(artistId, 
       function(err, d){
-        console.log(d);
+        // console.log(d);
         var relatedArtists = d.artists;
         for (var i=0;i<5;i++) {
             $("#relatedList").append("<li><img height=100 src=" + d.artists[i].images[0].url + ">" + relatedArtists[i].name + "<img src=img/play.png class=preview id=" + relatedArtists[i].id + "></li>");
@@ -274,7 +285,6 @@ function song (artist, title, youtubeId, bgImage) {
     $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[songNum].artist + "&jsoncallback=?", function(d) {   
       var msg = '';
       $("#showList").html(msg);
-      console.log(d);
       if (d.resultsPage.totalEntries === 0) {
         $("#showList").html("<li>Sorry, this artist has no upcoming performances.</li>");
       } else {
@@ -299,6 +309,58 @@ function song (artist, title, youtubeId, bgImage) {
         this.changeEvents();
         this.getBio();
   },
+    this.getTopTracks = function () {
+      $.ajax({
+      url: "https://api.spotify.com/v1/artists/" + songs[songNum].spotifyId + "/top-tracks?country=US",
+      async: false,
+      success: function(d) {
+        console.log(d);
+        for (var i=0;i<d.tracks.length;i++) {
+          topTracks[i] = d.tracks[i].id;
+          songs[songNum].topTracks = topTracks;
+        };
+      }
+    });
+    },
+    // d.audio_features[i].energy,
+    // d.audio_features[i].valence,
+    // d.audio_features[i].instrumentalness
+    this.setStats = function () {
+      spotifyApi.getAudioFeaturesForTracks(topTracks, function(err, d) {
+      var artistDanceability = 0;
+      var artistEnergy = 0;
+      var artistValence = 0;
+      var artistInstru = 0;
+      for (var i=0;i<10;i++) {
+        artistDanceability += d.audio_features[i].danceability;
+        artistEnergy += d.audio_features[i].energy;
+        artistValence += d.audio_features[i].valence;
+        artistInstru += d.audio_features[i].instrumentalness;
+      };
+        songs[songNum].danceability = artistDanceability/10;
+        songs[songNum].energy = artistEnergy/10;
+        songs[songNum].valence = artistValence/10;
+        songs[songNum].instru = artistInstru/10;
+      })
+    },
+    this.drawChart = function () {
+      google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(songs[songNum].drawChart);
+      // Define the chart to be drawn.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Attributes');
+      data.addColumn('number', 'Percentage');
+      data.addRows([
+        ['Danceability', this.danceability],
+        ['Energy', this.energy],
+        ['Valence', this.valence],
+        ['Instrumentalness', this.instru]
+      ]);
+
+      // Instantiate and draw the chart.
+      var chart = new google.visualization.BarChart(document.getElementById('stats'));
+      chart.draw(data, null);
+    },
     this.changePurchases = function () {
     $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[songNum].sevenDigitalId + "&country=ww&imageSize=350&type=album&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
           var msg = '';
@@ -330,6 +392,9 @@ function nextSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
+    songs[songNum].getTopTracks();
+    songs[songNum].setStats();
+    songs[songNum].drawChart();    
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
     player.loadVideoById(songs[songNum].youtubeId);
@@ -338,6 +403,9 @@ function nextSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
+    songs[songNum].getTopTracks();
+    songs[songNum].setStats();
+    songs[songNum].drawChart();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
 }
@@ -353,6 +421,9 @@ function prevSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
+    songs[songNum].getTopTracks();
+    songs[songNum].setStats();
+    songs[songNum].drawChart();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
     songNum -= 1;
@@ -362,6 +433,9 @@ function prevSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
+    songs[songNum].getTopTracks();
+    songs[songNum].setStats();
+    songs[songNum].drawChart();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
 }
@@ -468,6 +542,7 @@ $("#menu").click(function(e) {
 
 
 
+
 // AJAX call to search for seat geek artist ID
 // $.get("https://api.seatgeek.com/2/performers?q=lolitas&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5", function(d) {
 //   console.log(d);
@@ -518,7 +593,52 @@ $("#menu").click(function(e) {
 //       }
 //     }) 
 
-// spotifyApi.getArtist('3TXQ1ddouwQAI78hV4hXDj', 
-//       function(d){
+// spotifyApi.getArtistTopTracks(songs[0].spotifyId, 
+//       function(err, d){
 //         console.log(d);
 // });
+
+var topTracks = [];
+var topTracksStats = [];
+var topTracksStatsAvg = [];
+// $.ajax({
+//       url: "https://api.spotify.com/v1/artists/" + songs[songNum].spotifyId + "/top-tracks?country=US",
+//       async: true,
+//       success: function(d) {
+//         console.log(d);
+//         for (var i=0;i<d.tracks.length;i++) {
+//           topTracks[i] = d.tracks[i].id;
+//         }
+//       }
+//     });
+
+ // $.ajax({
+ //      url: "https://api.spotify.com/v1/audio-features?ids=" + topTracks[0] + "," + topTracks[1] + "?client_id=1f28c1aacefc4c559bc5673be94eb276",
+ //      async: true,
+ //      success: function(d) {
+ //        console.log(d);
+ //        for (var i=0;i<d.tracks.length;i++) {
+ //          topTracks[i] = d.tracks[i].id;
+ //        }
+ //      }
+ //    });
+
+// spotifyApi.getAudioFeaturesForTracks(topTracks, function(err, d) {
+//   console.log(d);
+//   for (var i=0;i<10;i++) {
+//     topTracksStats[i] = [d.audio_features[i].danceability,
+//                         d.audio_features[i].energy,
+//                         d.audio_features[i].valence,
+//                         d.audio_features[i].instrumentalness
+//                         ];
+//   };
+// });
+
+
+
+// for (var i=0;i<4;i++) {
+//   for (var j=0;j<10;j++) {
+//     topTracksStatsAvg[i] += topTracksStats[j][i];
+//   }
+//     topTracksStatsAvg[i] = topTracksStatsAvg[i]/4;
+// }

@@ -445,6 +445,20 @@ audio {
 
 }
 
+#chart {
+	background-color: white;
+	z-index: 5000;
+	height: 500px;
+}
+
+#chart div {
+  display: inline-block;
+  width: 20%;
+  height: 20%;
+  margin-right: 3px;
+  background-color: yellow;
+}
+
 #menu {
 	width: 100%;
 	height: 100%;
