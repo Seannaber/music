@@ -255,8 +255,8 @@ canvas {
 	margin: 0px auto 0px auto;
 }
 
-#related h1, #shows h1, #buy h1, #stats h1 {
-	margin-top: 75px;
+.sectionHeader {
+	margin: 50px;
 }
 
 #iconMenu a {
@@ -287,20 +287,36 @@ canvas {
 
 .navArrowsTop {
 	color: white;
-	font-size: 2.5em;
+	font-size: 3em;
 /*	position: absolute;
 	bottom: 0px;*/
 }
 
 .navArrowsBottom {
 	color: white;
-	font-size: 2.5em;
-	position: absolute;
-	top: 85%;
+	font-size: 3em;
+	position: relative;
+	top: 80%;
 	left:45%;
 /*	right: 50%;*/
 	/*margin: 0 auto*/;
 /*	width: 100%;*/
+}
+
+.navArrowsLeft {
+	color: white;
+	font-size: 1.75em;
+	position: relative;
+	top: 50%;
+	left: 0%;
+}
+
+.navArrowsRight {
+	color: white;
+	font-size: 1.75em;
+	position: absolute;
+	top: 50%;
+	right: 1%;
 }
 
 #buyList img {
@@ -356,6 +372,8 @@ canvas {
 	width: 75%;
 	text-align: left;
 	margin: 100px auto;
+	overflow-y: scroll;
+	max-height: 55%;
 }
 
 #shows ul {
@@ -368,10 +386,10 @@ canvas {
 	margin-bottom: 100px;
 }
 
-#buy h1, #shows h1 {
+/*#buy h1, #shows h1 {
 	margin-top: 0px;
 	margin-bottom: 0px;
-}
+}*/
 
 .price {
 	font-family: 'Raleway', sans-serif;

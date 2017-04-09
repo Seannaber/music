@@ -124,7 +124,7 @@ $('#main').css('min-height', screenHeight);
 // $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken('BQBRTYnsJLOCY34VJkopohK7U6Hh-3LkD2xB53GBJAmPpWCSRiZy7j5UCGjQ2OTc_y5FsnRlf05qqXBuENZks5y4-9tqtwYKdBIUFLN8hB3b_iILFNCKlt7PXnnNbx3LzcobmBTFBg');
+spotifyApi.setAccessToken('BQBPwGU-hbCDb_dxdCs4qnT1g5d0KdmtgA4mizceoZ4U3rNfqouZbxpjMB5itKjt1KkkNKl9GWpM-8uixw3hLckRQ4p-gZjmA_9jc2H1KtXIkLyiX_Xk1HqNLI8MT5ovQqPmm6b63Q');
 var artistId = songs[songNum].spotifyId;
 var audio = $('#spotifyPlayer');
 
@@ -503,7 +503,7 @@ $(".main").onepage_scroll({
    responsiveFallback: false,        // You can fallback to normal page scroll by defining the width of the browser in which
                                     // you want the responsive fallback to be triggered. For example, set this to 600 and whenever
                                     // the browser's width is less than 600, the fallback will kick in.
-   direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".  
+   direction: "horizontal"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".  
 });
 
 $("#bio").hide();
