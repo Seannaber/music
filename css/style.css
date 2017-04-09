@@ -445,7 +445,7 @@ audio {
 
 }
 
-#chart {
+/*#chart {
 	background-color: white;
 	z-index: 5000;
 	height: 500px;
@@ -457,7 +457,7 @@ audio {
   height: 20%;
   margin-right: 3px;
   background-color: yellow;
-}
+}*/
 
 #menu {
 	width: 100%;
@@ -506,4 +506,19 @@ audio {
 
 .main {
 	transition: all .3s;
+}
+
+#stats {
+	color: white;
+}
+
+.rbc-center-text {
+	fill: white;
+}
+
+#stats h2 {
+	font-size: 1.25em;
+	margin-bottom: 35px;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
 }
