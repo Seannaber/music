@@ -17,19 +17,20 @@
 			<section id="main" class="text-center">
 				<span class="mobileMenu glyphicon glyphicon-align-left"></span>
 				<h1 class="logo">beech.fm</h1>
-				<div id="songName"></div>
-				<div class="row text-center">
-					<div class="col-xs-1"></div>
-					<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
-					<div class="col-xs-0"></div>
-					<div class="col-xs-4">
-						<canvas id="counter" width="300" height="300"></canvas> 
-						<img src="img/play.png" id="play-button" class="align-middle play center-block text-center">
-						<img src="img/pause.png" id="pause-button" class="align-middle play center-block text-center"></div>
-					<div class="col-xs-0"></div>
-					<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
-					<div class="col-xs-1"></div>
-				</div>
+					<div id="songName"></div>
+					<div class="row text-center">
+						<div class="col-xs-1"></div>
+						<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
+						<div class="col-xs-0"></div>
+						<div class="col-xs-4">
+							<canvas id="counter" width="300" height="300"></canvas> 
+							<img src="img/play.png" id="play-button" class="align-middle play center-block text-center">
+							<img src="img/pause.png" id="pause-button" class="align-middle play center-block text-center"></div>
+						<div class="col-xs-0"></div>
+						<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
+						<div class="col-xs-1"><a data-index=2 href="#2" id="mainPageArrow"><span class="navArrowsRight glyphicon glyphicon-chevron-right" onclick="toPage(2)"></span></a></div>
+					</div>
+
 
 				<div id="iconMenu" class="align-middle text-center">
 					<ul class="align-middle text-center">
@@ -39,7 +40,7 @@
 						<li id="viewVid"><span class="icons glyphicon glyphicon-eye-open"></span></li>
 						<li id="info"><span class="icons glyphicon glyphicon-info-sign"></span></li>
 					</ul>
-					<a data-index=2 href="#2"><span class="navArrows glyphicon glyphicon-chevron-down" onclick="toPage(2)"></span></a>
+					
 				</div>
 			</section>
 			
@@ -108,36 +109,7 @@
 				<div class="navArrowsRight col-xs-1">
 					
 				</div>
-			</section>
-			<!-- <section id="stats" class="row text-center">
-				<a data-index=4 href="#4"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(4)"></span></a>
-				<h1>Artist Audio DNA</h1>
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-xs-6">
-							<div id="chart1"><h2>Danceability</h2></div>
-							<div id="chart2"><h2>Energy</h2></div>
-						</div>
-						<div class="col-xs-6">
-							<div id="chart3"><h2>Valence</h2></div>
-							<div id="chart4"><h2>Intrumentalness</h2></div>
-						</div>
-					</div>
-				</div>
-				<a data-index=6 href="#6"><span class="navArrowsBottom glyphicon glyphicon-chevron-down" onclick="toPage(5)"></span></a>
-			</section> -->
-<!-- 			<section id="stats2" class="text-center">
-				<a data-index=5 href="#5"><span class="navArrowsTop glyphicon glyphicon-chevron-up" onclick="toPage(4)"></span></a>
-				<h1>Track Stats</h1>
-				<ul id="statList">Loading...</ul>
-				<div id="chart2">
-					
-				</div>
-				
-			</section> -->
-
-			
-		
+			</section>		
 			<audio id="spotifyPlayer" controls>
 			    <source src="" 
 			    type='audio/mpeg'>
@@ -165,19 +137,20 @@
 	    <span id="hideMenu" class="icons glyphicon glyphicon-remove"></span>
 	</div>
 	<div id="miniPlayer" class="text-center">
-			<div id="songName"></div>
-				<div class="row text-center">
-					<div class="col-xs-1"></div>
-					<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
-					<div class="col-xs-0"></div>
-					<div class="col-xs-4">
-						<img src="img/play.png" id="play-button-mini" class="text-center">
-						<img src="img/pause.png" id="pause-button-mini" class="text-center"></div>
-					<div class="col-xs-0"></div>
-					<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
-					<div class="col-xs-1"></div>
-				</div>
-				</div>
+			
+		<div class="row text-center">
+			<div class="col-xs-1"></div>
+			<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
+			<div class="col-xs-0"></div>
+			<div class="col-xs-4">
+				<img src="img/play.png" id="play-button-mini" class="text-center">
+				<img src="img/pause.png" id="pause-button-mini" class="text-center"></div>
+			<div class="col-xs-0"></div>
+			<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
+			<div class="col-xs-1"></div>
+		</div>
+		<div id="nowPlaying">Testing</div>
+		</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<script 

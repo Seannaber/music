@@ -51,7 +51,7 @@ body {
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	height: 150px;
+	height: 185px;
 	background: rgba(0,0,0,.55);
 	padding-top: 20px;
 }
@@ -305,18 +305,26 @@ canvas {
 
 .navArrowsLeft {
 	color: white;
-	font-size: 1.75em;
+	font-size: 2em;
 	position: relative;
 	top: 50%;
 	left: 0%;
+	z-index: 100;
 }
 
 .navArrowsRight {
 	color: white;
-	font-size: 1.75em;
+	font-size: 2em;
 	position: absolute;
 	top: 50%;
 	right: 1%;
+	z-index: 100;
+}
+
+#mainPageArrow {
+	font-size: 5em;
+	right: 20%;
+	position: absolute;
 }
 
 #buyList img {
@@ -369,7 +377,7 @@ canvas {
 }
 
 #buy ul {
-	width: 75%;
+	width: 95%;
 	text-align: left;
 	margin: 100px auto;
 	overflow-y: scroll;
@@ -377,12 +385,12 @@ canvas {
 }
 
 #shows ul {
-	width: 75%;
+	width: 80%;
 	margin: 100px auto;
 }
 
 #related ul {
-	width: 75%;
+	width: 100%;
 	margin-bottom: 100px;
 }
 
@@ -390,6 +398,14 @@ canvas {
 	margin-top: 0px;
 	margin-bottom: 0px;
 }*/
+
+#nowPlaying {
+	font-size: 3em;
+	color: white;
+	font-family: 'Raleway', sans-serif;
+	font-weight: bold;
+	margin-top: 15px;
+}
 
 .price {
 	font-family: 'Raleway', sans-serif;

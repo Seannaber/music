@@ -26,6 +26,7 @@ function onYouTubeIframeAPIReady() {
         songs[songNum].getTopTracks();
         songs[songNum].setStats();
         delayedChart();
+        nowPlaying();
       },
       'onStateChange': function(e) {
         updateBar();
@@ -124,7 +125,7 @@ $('#main').css('min-height', screenHeight);
 // $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken('BQBPwGU-hbCDb_dxdCs4qnT1g5d0KdmtgA4mizceoZ4U3rNfqouZbxpjMB5itKjt1KkkNKl9GWpM-8uixw3hLckRQ4p-gZjmA_9jc2H1KtXIkLyiX_Xk1HqNLI8MT5ovQqPmm6b63Q');
+spotifyApi.setAccessToken('BQBqfuJiPr1-im3LbD5R4ZD5jph8KO9sKpWFZCL-ZOy3YoXWB8UyCXUXV5yzJyD5qa3I5f774kJmEd5uPw_i9kbX61PqJhm8lm8Ag8nedA4oxK70xDlGsUCTryVaeZJ5mMGLrPy3VQ');
 var artistId = songs[songNum].spotifyId;
 var audio = $('#spotifyPlayer');
 
@@ -242,6 +243,16 @@ setSevenDigitalId = function() {
     }) 
   }
 };
+
+nowPlaying = function() {
+  var msg = songs[songNum].artist + " - " + songs[songNum].title
+  console.log(msg.length);
+  if (msg.length > 40) {
+    msg = msg.substring(0,40) + "...";
+    $("#nowPlaying").html(msg);
+  } else {
+  $("#nowPlaying").html(songs[songNum].artist + " - " + songs[songNum].title);
+}}
 
 
 var shows = $("#showList");
@@ -403,7 +414,8 @@ function nextSong() {
     songs[songNum].changePurchases();
     songs[songNum].getTopTracks();
     songs[songNum].setStats();
-    songs[songNum].drawChart();    
+    songs[songNum].drawChart();   
+    nowPlaying(); 
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
     player.loadVideoById(songs[songNum].youtubeId);
@@ -415,6 +427,7 @@ function nextSong() {
     songs[songNum].getTopTracks();
     songs[songNum].setStats();
     songs[songNum].drawChart();
+    nowPlaying(); 
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
 }
@@ -494,7 +507,7 @@ $(".main").onepage_scroll({
    easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",
                                     // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
    animationTime: 1000,             // AnimationTime let you define how long each section takes to animate
-   pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.
+   pagination: false,                // You can either show or hide the pagination. Toggle true for show, false for hide.
    updateURL: false,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
    beforeMove: function(index) {},  // This option accepts a callback function. The function will be called before the page moves.
    afterMove: function(index) {},   // This option accepts a callback function. The function will be called after the page moves.
