@@ -1,11 +1,11 @@
 var player;
 var songNum = 0;
 var songs = [];
-songs[0] = new song ("Suzanne Kraft","No Worries (Secret Circuit Professional Gold Mix)","6OfmeAz1sJQ", "https://f4.bcbits.com/img/a2725264209_10.jpg")
-songs[1] = new song ("Young Marco","Psychotic Particle","8J47f2om1zs","http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg");
-songs[2] = new song ("Maceo Plex","Polygon Pulse", "NHjDC0dMDv8", "https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg" );
-songs[3] = new song ("Fort Romeau","Saku", "H0iKVNwpk8Y", "http://scontent.cdninstagram.com/t51.2885-15/e35/17333260_402281090132204_5352682402290335744_n.jpg?ig_cache_key=MTQ3MjY1MDkxNTc5MzM2OTQ5MA%3D%3D.2" );
-songs[4] = new song ("Shit Robot","OB-8", "yrPZRtHpDjY", "http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg" );
+songs[0] = new song ("Suzanne Kraft","No Worries (Secret Circuit Professional Gold Mix)","6OfmeAz1sJQ", "https://f4.bcbits.com/img/a2725264209_10.jpg",58,34,33,88)
+songs[1] = new song ("Young Marco","Psychotic Particle","8J47f2om1zs","http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg",69,62,46,67);
+songs[2] = new song ("Maceo Plex","Polygon Pulse", "NHjDC0dMDv8", "https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg",78,64,33,78 );
+songs[3] = new song ("Fort Romeau","Saku", "H0iKVNwpk8Y", "http://scontent.cdninstagram.com/t51.2885-15/e35/17333260_402281090132204_5352682402290335744_n.jpg?ig_cache_key=MTQ3MjY1MDkxNTc5MzM2OTQ5MA%3D%3D.2",77,54,45,89 );
+songs[4] = new song ("Shit Robot","OB-8", "yrPZRtHpDjY", "http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg",69,71,57,59 );
 songs[songNum].changeEvents();
 
 // Loads initial song to be played 
@@ -23,10 +23,11 @@ function onYouTubeIframeAPIReady() {
         songs[songNum].changeRelated();
         songs[songNum].getBio();
         songs[songNum].changePurchases();
-        songs[songNum].getTopTracks();
-        songs[songNum].setStats();
+        // songs[songNum].getTopTracks();
+        // songs[songNum].setStats();
         delayedChart();
         nowPlaying();
+        nameDNA();
       },
       'onStateChange': function(e) {
         updateBar();
@@ -125,7 +126,7 @@ $('#main').css('min-height', screenHeight);
 // $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken('BQBqfuJiPr1-im3LbD5R4ZD5jph8KO9sKpWFZCL-ZOy3YoXWB8UyCXUXV5yzJyD5qa3I5f774kJmEd5uPw_i9kbX61PqJhm8lm8Ag8nedA4oxK70xDlGsUCTryVaeZJ5mMGLrPy3VQ');
+spotifyApi.setAccessToken('BQCV23MDlLS1H6Z2NmoQSG1286-H389Ctd_fEm7cxm6RZjc2jwks4V0ythY_KFn8vEk7A1HWIh3ZVoFplyqS-KUcao5BuABh_3El6LNKCFa0fMSjoo499qaQKJpt6EM74oNVitXhTA');
 var artistId = songs[songNum].spotifyId;
 var audio = $('#spotifyPlayer');
 
@@ -182,7 +183,6 @@ setSeatgeekId = function() {
 };
 
 setSpotifyId = function() {
-  var r = $.Deferred();
   for (var i=0; i<songs.length; i++) {
     $.ajax({
       url: "https://api.spotify.com/v1/search?q=" + songs[i].artist + "&type=artist",
@@ -192,7 +192,6 @@ setSpotifyId = function() {
       }
     }) 
   }
-  return r;
 };
 
 // setDiscogsId = function() {
@@ -259,7 +258,7 @@ var shows = $("#showList");
 var msg = "";
 
 // Constructor for song objects
-function song (artist, title, youtubeId, bgImage) {
+function song (artist, title, youtubeId, bgImage, stat1, stat2, stat3, stat4) {
   this.liked = false,
   this.hated = false,
   this.artist = artist,
@@ -267,7 +266,10 @@ function song (artist, title, youtubeId, bgImage) {
   this.youtubeId = youtubeId,
   this.spotifyId = "",
   this.seatgeekId = "",
-  this.danceability,
+  this.danceability = stat1,
+  this.energy = stat2,
+  this.valence = stat3,
+  this.instru = stat4,
   // this.discogsId = "",
   // on song change, updates background
   this.changeBg = function (songNum) {
@@ -275,7 +277,6 @@ function song (artist, title, youtubeId, bgImage) {
   },
   // on song change, updates related artists from Spotify API
   this.changeRelated = function () {
-    var r = $.Deferred();
     artistId = songs[songNum].spotifyId;
     $("#relatedList").text('');
     spotifyApi.getArtistRelatedArtists(artistId, 
@@ -289,7 +290,6 @@ function song (artist, title, youtubeId, bgImage) {
     // var relatedHeight = $("#relatedList").height();
     // console.log(relatedHeight);
     // $("#relatedList").css("margin-top",(screen.height/3));
-  return r;
   },
 
 
@@ -326,51 +326,51 @@ function song (artist, title, youtubeId, bgImage) {
         this.changeEvents();
         this.getBio();
   },
-    this.getTopTracks = function () {
-      var r = $.Deferred();
-      $.ajax({
-      url: "https://api.spotify.com/v1/artists/" + songs[songNum].spotifyId + "/top-tracks?country=US",
-      async: false,
-      success: function(d) {
-        for (var i=0;i<d.tracks.length;i++) {
-          topTracks[i] = d.tracks[i].id;
-          songs[songNum].topTracks = topTracks;
-        };
-      }
-    })
-      return r;
-    },
+    // this.getTopTracks = function () {
+    //   var r = $.Deferred();
+    //   $.ajax({
+    //   url: "https://api.spotify.com/v1/artists/" + songs[songNum].spotifyId + "/top-tracks?country=US",
+    //   async: false,
+    //   success: function(d) {
+    //     for (var i=0;i<d.tracks.length;i++) {
+    //       topTracks[i] = d.tracks[i].id;
+    //       songs[songNum].topTracks = topTracks;
+    //     };
+    //   }
+    // })
+    //   return r;
+    // },
     // d.audio_features[i].energy,
     // d.audio_features[i].valence,
     // d.audio_features[i].instrumentalness
-    this.setStats = function () {
-      var r = $.Deferred();
-      spotifyApi.getAudioFeaturesForTracks(topTracks, function(err, d) {
-      var artistDanceability = 0;
-      var artistEnergy = 0;
-      var artistValence = 0;
-      var artistInstru = 0;
-      for (var i=0;i<10;i++) {
-        artistDanceability += d.audio_features[i].danceability;
-        artistEnergy += d.audio_features[i].energy;
-        artistValence += d.audio_features[i].valence;
-        artistInstru += d.audio_features[i].instrumentalness;
-      };
-        songs[songNum].danceability = artistDanceability/10;
-        songs[songNum].energy = artistEnergy/10;
-        songs[songNum].valence = artistValence/10;
-        songs[songNum].instru = artistInstru/10;
-      });
-      // $("chart1").html('');
-      // $("chart2").html('');
-      // $("chart3").html('');
-      // $("chart4").html('');
-      // artistStats1.update(parseInt((this.danceability * 100).toFixed(0)));
-      // artistStats2.update(parseInt((this.energy * 100).toFixed(0)));
-      // artistStats3.update(parseInt((this.valence * 100).toFixed(0)));
-      // artistStats4.update(parseInt((this.instru * 100).toFixed(0)));
-      return r;
-    },
+    // this.setStats = function () {
+    //   var r = $.Deferred();
+    //   spotifyApi.getAudioFeaturesForTracks(topTracks, function(err, d) {
+    //   var artistDanceability = 0;
+    //   var artistEnergy = 0;
+    //   var artistValence = 0;
+    //   var artistInstru = 0;
+    //   for (var i=0;i<10;i++) {
+    //     artistDanceability += d.audio_features[i].danceability;
+    //     artistEnergy += d.audio_features[i].energy;
+    //     artistValence += d.audio_features[i].valence;
+    //     artistInstru += d.audio_features[i].instrumentalness;
+    //   };
+    //     songs[songNum].danceability = artistDanceability/10;
+    //     songs[songNum].energy = artistEnergy/10;
+    //     songs[songNum].valence = artistValence/10;
+    //     songs[songNum].instru = artistInstru/10;
+    //   });
+    //   // $("chart1").html('');
+    //   // $("chart2").html('');
+    //   // $("chart3").html('');
+    //   // $("chart4").html('');
+    //   // artistStats1.update(parseInt((this.danceability * 100).toFixed(0)));
+    //   // artistStats2.update(parseInt((this.energy * 100).toFixed(0)));
+    //   // artistStats3.update(parseInt((this.valence * 100).toFixed(0)));
+    //   // artistStats4.update(parseInt((this.instru * 100).toFixed(0)));
+    //   return r;
+    // },
     this.drawChart = function () {
       $("chart1").html('');
       $("chart2").html('');
@@ -399,6 +399,11 @@ function song (artist, title, youtubeId, bgImage) {
   }
 }
 
+function nameDNA() {
+  $("#nameDNA").text(songs[songNum].artist);
+}
+
+
 // moves to next song in songs array
 function nextSong() {
   ctx.clearRect(0, 0, 300, 300);
@@ -412,10 +417,9 @@ function nextSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
-    songs[songNum].getTopTracks();
-    songs[songNum].setStats();
-    songs[songNum].drawChart();   
+    drawChart();   
     nowPlaying(); 
+    nameDNA();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
     player.loadVideoById(songs[songNum].youtubeId);
@@ -424,10 +428,9 @@ function nextSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
-    songs[songNum].getTopTracks();
-    songs[songNum].setStats();
-    songs[songNum].drawChart();
+    drawChart();
     nowPlaying(); 
+    nameDNA();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
 }
@@ -443,9 +446,8 @@ function prevSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
-    songs[songNum].getTopTracks();
-    songs[songNum].setStats();
-    songs[songNum].drawChart();
+    delayedChart();
+    nameDNA();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
     songNum -= 1;
@@ -455,9 +457,8 @@ function prevSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
-    songs[songNum].getTopTracks();
-    songs[songNum].setStats();
-    songs[songNum].drawChart();
+    delayedChart();
+    nameDNA();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
 }
@@ -572,28 +573,28 @@ $("#menu").click(function(e) {
 //   })();
 
 function delayedChart() {
-  setTimeout(drawChart, 2000);
+  setTimeout(drawChart, 200);
 }
 
 var artistStats1 = new RadialProgressChart('#chart1', 
-  {series: [parseInt((songs[songNum].danceability * 100).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].danceability * 100).toFixed(0))
+  {series: [parseInt((songs[songNum].danceability).toFixed(0))], center: function() {
+        return parseInt((songs[songNum].danceability).toFixed(0))
       }});
-      var artistStats2 = new RadialProgressChart('#chart2', {series: [parseInt((songs[songNum].energy * 100).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].energy * 100).toFixed(0))
+      var artistStats2 = new RadialProgressChart('#chart2', {series: [parseInt((songs[songNum].energy).toFixed(0))], center: function() {
+        return parseInt((songs[songNum].energy).toFixed(0))
       }});
-      var artistStats3 = new RadialProgressChart('#chart3', {series: [parseInt((songs[songNum].valence * 100).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].valence * 100).toFixed(0))
+      var artistStats3 = new RadialProgressChart('#chart3', {series: [parseInt((songs[songNum].valence).toFixed(0))], center: function() {
+        return parseInt((songs[songNum].valence).toFixed(0))
       }});
-      var artistStats4 = new RadialProgressChart('#chart4', {series: [parseInt((songs[songNum].instru * 100).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].instru * 100).toFixed(0))
+      var artistStats4 = new RadialProgressChart('#chart4', {series: [parseInt((songs[songNum].instru).toFixed(0))], center: function() {
+        return parseInt((songs[songNum].instru).toFixed(0))
       }});
 
 function drawChart() {
-      artistStats1.update(parseInt((songs[songNum].danceability * 100).toFixed(0)));
-      artistStats2.update(parseInt((songs[songNum].energy * 100).toFixed(0)));
-      artistStats3.update(parseInt((songs[songNum].valence * 100).toFixed(0)));
-      artistStats4.update(parseInt((songs[songNum].instru * 100).toFixed(0)));
+      artistStats1.update(songs[songNum].danceability);
+      artistStats2.update(songs[songNum].energy);
+      artistStats3.update(songs[songNum].valence);
+      artistStats4.update(songs[songNum].instru);
     }
 
 // var artistStats1 = new RadialProgressChart('#chart1', {series: [parseInt((songs[songNum].danceability * 100).toFixed(0))]});

@@ -17,22 +17,22 @@
 			<section id="main" class="text-center">
 				<span class="mobileMenu glyphicon glyphicon-align-left"></span>
 				<h1 class="logo">beech.fm</h1>
-					<div id="songName"></div>
-					<div class="row text-center">
-						<div class="col-xs-1"></div>
-						<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
-						<div class="col-xs-0"></div>
-						<div class="col-xs-4">
-							<canvas id="counter" width="300" height="300"></canvas> 
-							<img src="img/play.png" id="play-button" class="align-middle play center-block text-center">
-							<img src="img/pause.png" id="pause-button" class="align-middle play center-block text-center"></div>
-						<div class="col-xs-0"></div>
-						<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
-						<div class="col-xs-1"><a data-index=2 href="#2" id="mainPageArrow"><span class="navArrowsRight glyphicon glyphicon-chevron-right" onclick="toPage(2)"></span></a></div>
-					</div>
-
+				<div id="songName"></div>
+				<div class="row text-center">
+					<div class="col-xs-1"></div>
+					<div class="col-xs-3"><img src="img/prev.png" onclick="prevSong()" class="align-middle nextprev text-center"></div>
+					<div class="col-xs-0"></div>
+					<div class="col-xs-4">
+						<canvas id="counter" width="300" height="300"></canvas> 
+						<img src="img/play.png" id="play-button" class="align-middle play center-block text-center">
+						<img src="img/pause.png" id="pause-button" class="align-middle play center-block text-center"></div>
+					<div class="col-xs-0"></div>
+					<div class="col-xs-3"><img src="img/next.png" onclick="nextSong()" class="align-middle nextprev text-center"></div>
+					<div class="col-xs-1"></div>
+				</div>
 
 				<div id="iconMenu" class="align-middle text-center">
+					<a data-index=2 href="#2" id="mainPageArrow"><span class="glyphicon glyphicon-chevron-right" onclick="toPage(2)"></span></a>
 					<ul class="align-middle text-center">
 						<li id="like"><span class="icons glyphicon glyphicon-heart"></span></li>
 						<li id="hate"><span class="icons glyphicon glyphicon-ban-circle"></span></li>
@@ -94,7 +94,7 @@
 					<a data-index=4 href="#4"><span class="navArrowsLeft glyphicon glyphicon-chevron-left" onclick="toPage(4)"></span></a>
 				</div>
 				<div class="col-xs-10">
-					<h1 class="sectionHeader">Artist Audio DNA</h1>
+					<h1 class="sectionHeader"><span id="nameDNA">Artist</span></br>Audio DNA</h1>
 					<div class="row">
 						<div class="col-xs-6">
 							<div id="chart1"><h2>Danceability</h2></div>

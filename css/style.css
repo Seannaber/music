@@ -184,6 +184,7 @@ html, body {
 
 #iconMenu ul {
 	padding-bottom: 50px;
+	padding-top: 50px;
 }
 
 #iconMenu  {
@@ -259,11 +260,11 @@ canvas {
 	margin: 50px;
 }
 
-#iconMenu a {
+/*#iconMenu a {
 	font-size: 1em;
 	font-family: 'Raleway', sans-serif;
 	font-weight: bold;
-}
+}*/
 
 #toPage2 {
 	margin-top: 50px;
@@ -322,9 +323,9 @@ canvas {
 }
 
 #mainPageArrow {
-	font-size: 5em;
-	right: 20%;
-	position: absolute;
+	font-size: 10em;
+	margin-bottom: 50px;
+	color: white;
 }
 
 #buyList img {
