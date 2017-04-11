@@ -446,7 +446,8 @@ function prevSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
-    delayedChart();
+    drawChart();
+    nowPlaying();
     nameDNA();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   } else {
@@ -457,7 +458,8 @@ function prevSong() {
     songs[songNum].changeEvents();
     songs[songNum].getBio();
     songs[songNum].changePurchases();
-    delayedChart();
+    drawChart();
+    nowPlaying();
     nameDNA();
     $("#songName").html("<h2 id=artistname>" + songs[songNum].artist + "</h2></br><h3 id=songtitle>" + songs[songNum].title + "</h3>");
   }  
