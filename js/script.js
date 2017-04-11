@@ -126,7 +126,7 @@ $('#main').css('min-height', screenHeight);
 // $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken('BQCV23MDlLS1H6Z2NmoQSG1286-H389Ctd_fEm7cxm6RZjc2jwks4V0ythY_KFn8vEk7A1HWIh3ZVoFplyqS-KUcao5BuABh_3El6LNKCFa0fMSjoo499qaQKJpt6EM74oNVitXhTA');
+// spotifyApi.setAccessToken('BQCV23MDlLS1H6Z2NmoQSG1286-H389Ctd_fEm7cxm6RZjc2jwks4V0ythY_KFn8vEk7A1HWIh3ZVoFplyqS-KUcao5BuABh_3El6LNKCFa0fMSjoo499qaQKJpt6EM74oNVitXhTA');
 var artistId = songs[songNum].spotifyId;
 var audio = $('#spotifyPlayer');
 
