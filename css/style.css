@@ -57,7 +57,7 @@ body {
 	left: 0px;
 	width: 100%;
 	height: 190px;
-	background: rgba(255, 241, 165,.75);
+	background: rgba(255, 248, 211,.75);
 	padding-top: 20px;
 }
 
@@ -573,6 +573,7 @@ audio {
 	font-family: 'Raleway', sans-serif;
 	font-weight: bold;
 }
+
 
 /* Wave effect for logo - not written by me! 
 Thanks to Alexey Taktarov - https://codepen.io/molefrog/pen/ieJbo
