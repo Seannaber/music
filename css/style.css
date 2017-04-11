@@ -22,6 +22,11 @@
   	margin-top: 60px;
 }
 
+.nextprev2 {
+	height: 150px;
+  	margin-top: 60px;
+}
+
 body {
 	/*background-color: yellow;*/
 	margin: 0px auto;
@@ -51,8 +56,8 @@ body {
 	bottom: 0px;
 	left: 0px;
 	width: 100%;
-	height: 185px;
-	background: rgba(0,0,0,.55);
+	height: 190px;
+	background: rgba(255, 241, 165,.75);
 	padding-top: 20px;
 }
 
@@ -96,35 +101,35 @@ html, body {
 }
 
 .song1 {
-	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg),
+	background-image: url(https://www.residentadvisor.net/images/events/flyer/2016/11/es-1112-894240-836867-front.jpg),
 	-moz-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
+	background-image: url(https://www.residentadvisor.net/images/events/flyer/2016/11/es-1112-894240-836867-front.jpg), 
 	-webkit-gradient(left top, left bottom, color-stop(0%, rgba(15,5,94,1)), color-stop(49%, rgba(0,189,247,1)), color-stop(77%, rgba(65,130,117,1)), color-stop(100%, rgba(251,223,147,1)));
-	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
+	background-image: url(https://www.residentadvisor.net/images/events/flyer/2016/11/es-1112-894240-836867-front.jpg), 
 	-webkit-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
+	background-image: url(https://www.residentadvisor.net/images/events/flyer/2016/11/es-1112-894240-836867-front.jpg), 
 	-o-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
+	background-image: url(https://www.residentadvisor.net/images/events/flyer/2016/11/es-1112-894240-836867-front.jpg), 
 	-ms-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg), 
+	background-image: url(https://www.residentadvisor.net/images/events/flyer/2016/11/es-1112-894240-836867-front.jpg), 
 	linear-gradient(to bottom, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg),
+	background-image: url(https://www.residentadvisor.net/images/events/flyer/2016/11/es-1112-894240-836867-front.jpg),
 }
 
 .song2 {
-	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg),
+	background-image: url(http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg),
 	-moz-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
+	background-image: url(http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg), 
 	-webkit-gradient(left top, left bottom, color-stop(0%, rgba(15,5,94,1)), color-stop(49%, rgba(0,189,247,1)), color-stop(77%, rgba(65,130,117,1)), color-stop(100%, rgba(251,223,147,1)));
-	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
+	background-image: url(http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg), 
 	-webkit-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
+	background-image: url(http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg), 
 	-o-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
+	background-image: url(http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg), 
 	-ms-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg), 
+	background-image: url(http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg), 
 	linear-gradient(to bottom, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://weownthenitenyc.com/wp-content/uploads/2016/05/We-Own-The-Nite-NYC_Maceo-Plex.jpg),
+	background-image: url(http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg),
 }
 
 .song3 {
@@ -144,19 +149,19 @@ html, body {
 }
 
 .song4 {
-	background-image: url(http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg),
+	background-image: url(http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg),
 	-moz-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg), 
+	background-image: url(http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg), 
 	-webkit-gradient(left top, left bottom, color-stop(0%, rgba(15,5,94,1)), color-stop(49%, rgba(0,189,247,1)), color-stop(77%, rgba(65,130,117,1)), color-stop(100%, rgba(251,223,147,1)));
-	background-image: url(http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg), 
+	background-image: url(http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg), 
 	-webkit-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg), 
+	background-image: url(http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg), 
 	-o-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg), 
+	background-image: url(http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg), 
 	-ms-linear-gradient(top, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg), 
+	background-image: url(http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg), 
 	linear-gradient(to bottom, rgba(15,5,94,1) 0%, rgba(0,189,247,1) 49%, rgba(65,130,117,1) 77%, rgba(251,223,147,1) 100%);
-	background-image: url(http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg),
+	background-image: url(http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg),
 }
 
 .activeIcon {
@@ -222,7 +227,7 @@ canvas {
 	left: 0px;
 }
 
-#bio {
+#bio, #onboard {
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -244,6 +249,15 @@ canvas {
 	right: 65px;
 	top: 65px;
 	z-index: 50;
+	font-size: 10em;
+}
+
+#hideOnboard {
+	position: absolute;
+	right: 65px;
+	top: 65px;
+	z-index: 50;
+	font-size: 4em;
 }
 
 #related, #shows, #buy, #stats {
@@ -251,7 +265,7 @@ canvas {
 	color: white;
 	list-style-type: none;
 	line-height: 2em;
-	background-color: rgba(0,0,0,.55);
+	background-color: rgba(0,0,0,.35);
 	/*max-width: 70%;*/
 	margin: 0px auto 0px auto;
 }
@@ -311,6 +325,7 @@ canvas {
 	top: 50%;
 	left: 0%;
 	z-index: 100;
+	opacity: .75;
 }
 
 .navArrowsRight {
@@ -320,12 +335,13 @@ canvas {
 	top: 50%;
 	right: 1%;
 	z-index: 100;
+	opacity: .75;
 }
 
 #mainPageArrow {
 	font-size: 10em;
 	margin-bottom: 50px;
-	color: white;
+	color: #f2ecae;
 }
 
 #buyList img {
@@ -402,10 +418,10 @@ canvas {
 
 #nowPlaying {
 	font-size: 3em;
-	color: white;
+	color: #153642;
 	font-family: 'Raleway', sans-serif;
 	font-weight: bold;
-	margin-top: 15px;
+	margin-top: 10px;
 }
 
 .price {
@@ -430,7 +446,7 @@ canvas {
 }
 
 #songtitle {
-	font-size: 1em;
+	font-size: 1.15em;
 	font-family: 'Raleway', sans-serif;
 	margin-top: -75px;
 	padding-bottom: 50px;
@@ -556,4 +572,66 @@ audio {
 	margin-bottom: 35px;
 	font-family: 'Raleway', sans-serif;
 	font-weight: bold;
+}
+
+/* Wave effect for logo - not written by me! 
+Thanks to Alexey Taktarov - https://codepen.io/molefrog/pen/ieJbo
+*/
+
+@keyframes wave {
+  from {
+    transform: translateY(0);
+    color: white;
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.wavetext span {
+  display: inline-block;
+  animation-duration: 1s;
+  animation-name: wave;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.wavetext :nth-child(8n + 0) {
+  animation-delay: -2s;
+  color: #ffef19;
+}
+
+.wavetext :nth-child(8n + 1) {
+  animation-delay: -1.75s;
+  color: #fff032;
+}
+
+.wavetext :nth-child(8n + 2) {
+  animation-delay: -1.5s;
+  color: #fcee41;
+}
+
+.wavetext :nth-child(8n + 3) {
+  animation-delay: -1.25s;
+  color: #fff25b;
+}
+
+.wavetext :nth-child(8n + 4) {
+  animation-delay: -1s;
+  color: #fff475;
+}
+
+.wavetext :nth-child(8n + 5) {
+  animation-delay: -.75s;
+  color: #f9f193;
+}
+
+.wavetext :nth-child(8n + 6) {
+  animation-delay: -.5s;
+  color: #f2ecae;
+}
+
+.wavetext :nth-child(8n + 7) {
+  animation-delay: -0.25s;
+  color: #fcf8d1;
 }

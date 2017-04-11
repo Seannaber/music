@@ -1,11 +1,11 @@
 var player;
 var songNum = 0;
 var songs = [];
-songs[0] = new song ("Suzanne Kraft","No Worries (Secret Circuit Professional Gold Mix)","6OfmeAz1sJQ", "https://f4.bcbits.com/img/a2725264209_10.jpg",58,34,33,88)
-songs[1] = new song ("Young Marco","Psychotic Particle","8J47f2om1zs","http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg",69,62,46,67);
-songs[2] = new song ("Maceo Plex","Polygon Pulse", "NHjDC0dMDv8", "https://www.residentadvisor.net/images/events/flyer/2015/4/uk-0404-683022-496487-front.jpg",78,64,33,78 );
-songs[3] = new song ("Fort Romeau","Saku", "H0iKVNwpk8Y", "http://scontent.cdninstagram.com/t51.2885-15/e35/17333260_402281090132204_5352682402290335744_n.jpg?ig_cache_key=MTQ3MjY1MDkxNTc5MzM2OTQ5MA%3D%3D.2",77,54,45,89 );
-songs[4] = new song ("Shit Robot","OB-8", "yrPZRtHpDjY", "http://www.playbackplayback.com/wp-content/uploads/2015/04/ShitRobot-940x940.jpg",69,71,57,59 );
+songs[0] = new song ("Suzanne Kraft","Crest","bl_PD-YlboI", "https://f4.bcbits.com/img/a2725264209_10.jpg",58,34,33,88)
+songs[1] = new song ("Fatima Yamaha","What's a Girl to Do","610DgdLgsrg","http://hyponik.com/wp-content/uploads/2014/09/YoungMarco_Hyponikbanner_RWalsh.jpg",69,62,46,67);
+songs[2] = new song ("Pional","Its All Over (Locked Groove Rendition)", "I05JazGbYZg", "http://content.acclaimmag.com/content/uploads/2016/09/pional-1.jpg",78,64,33,78 );
+songs[3] = new song ("Fort Romeau","K.O.N.T.R.O.L.", "GFcW7hN8AOQ", "http://scontent.cdninstagram.com/t51.2885-15/e35/17333260_402281090132204_5352682402290335744_n.jpg?ig_cache_key=MTQ3MjY1MDkxNTc5MzM2OTQ5MA%3D%3D.2",77,54,45,89 );
+songs[4] = new song ("Todd Terje","Swing Star Part 1", "SCtd_Mw7cFY", "http://filtermexico.com/wp-content/uploads/2013/07/Todd-Terje-2.jpg",69,71,57,59 );
 songs[songNum].changeEvents();
 
 // Loads initial song to be played 
@@ -14,17 +14,13 @@ function onYouTubeIframeAPIReady() {
     videoId: songs[songNum].youtubeId,
     events: {
       'onReady': function() {
-        setSeatgeekId();
         setSpotifyId();
-        // setDiscogsId();
         setSevenDigitalId();
         setSongKickId();
         songs[songNum].changeEvents();
         songs[songNum].changeRelated();
         songs[songNum].getBio();
         songs[songNum].changePurchases();
-        // songs[songNum].getTopTracks();
-        // songs[songNum].setStats();
         delayedChart();
         nowPlaying();
         nameDNA();
@@ -64,12 +60,10 @@ playButtonMini.on("click", function() {
 
 // Fires when pause button is clicked  
 var pauseButtonMini = $("#pause-button-mini");
-// pauseButton.hide();
 pauseButtonMini.on("click", function() {
   audio[0].pause();
   player.pauseVideo();
   $(this).animate({
-    // height: 400,
     opacity: "toggle"}, 450, function() {
       $(this).hide().fadeOut(function() {
         pauseButton.hide();
@@ -119,14 +113,9 @@ pauseButtonMini.hide();
 
 // Obtains screen height and makes CSS adjustments
 var screenHeight = screen.height;
-// $('body').css({'padding-top': screenHeight/2});
 $('#main').css('min-height', screenHeight);
-// $('body').css('min-height', screenHeight);
-// $("#iconMenu ul").css('margin-top', screenHeight/2);
-// $("#iconMenu ul").css('position', 'absolute').css('bottom', 30);
 
 var spotifyApi = new SpotifyWebApi();
-// spotifyApi.setAccessToken('BQCV23MDlLS1H6Z2NmoQSG1286-H389Ctd_fEm7cxm6RZjc2jwks4V0ythY_KFn8vEk7A1HWIh3ZVoFplyqS-KUcao5BuABh_3El6LNKCFa0fMSjoo499qaQKJpt6EM74oNVitXhTA');
 var artistId = songs[songNum].spotifyId;
 var audio = $('#spotifyPlayer');
 
@@ -170,18 +159,7 @@ $("#related").click(function(e) {
     audio[0].pause();
 }});
 
-setSeatgeekId = function() {
-  for (var i=0; i<songs.length; i++) {
-    $.ajax({
-      url: "https://api.seatgeek.com/2/performers?q=" + songs[i].artist + "&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5",
-      async: false,
-      success: function(d) {
-        songs[i].seatgeekId = d.performers[0].id;
-      }
-    }) 
-  }
-};
-
+// sets spotify ID for all songs
 setSpotifyId = function() {
   for (var i=0; i<songs.length; i++) {
     $.ajax({
@@ -194,20 +172,7 @@ setSpotifyId = function() {
   }
 };
 
-// setDiscogsId = function() {
-//   for (var i=0; i<songs.length; i++) {
-//     $.ajax({
-//       url: "https://api.discogs.com/database/search?q=" + songs[i].artist + "&key=aZOluklbWLHcZCDcXMUt&secret=WphUDuSHgaomOzAiUmGBxUVwhRAXjnaR",
-//       async: false,
-//       success: function(d) {
-//         songs[i].discogsId = d.results[0].id;
-//       }
-//     }) 
-//   }
-// };
-
-
-
+// sets songkick ID for all songs
 var kickIds = [];
 setSongKickId = function() {
   for (var i=0; i<songs.length; i++) {
@@ -216,11 +181,8 @@ setSongKickId = function() {
       async: false,
       dataType: "JSONP",
       success: function(d) {
-        // console.log(d.resultsPage.results.artist[0].id);
         var result = d.resultsPage.results.artist[0].id;
-        // console.log(songs[i].artist);
         kickIds.push(result);
-        // console.log(kickIds);
       }
     }).then(function() {
       for (var i=0; i<songs.length; i++) {
@@ -230,6 +192,7 @@ setSongKickId = function() {
   }
 };
 
+// sets 7digital ID for all songs
 setSevenDigitalId = function() {
   for (var i=0; i<songs.length; i++) {
     $.ajax({
@@ -243,6 +206,7 @@ setSevenDigitalId = function() {
   }
 };
 
+// updates artist/title in mini player
 nowPlaying = function() {
   var msg = songs[songNum].artist + " - " + songs[songNum].title
   console.log(msg.length);
@@ -253,7 +217,7 @@ nowPlaying = function() {
   $("#nowPlaying").html(songs[songNum].artist + " - " + songs[songNum].title);
 }}
 
-
+// misc variable declarations
 var shows = $("#showList");
 var msg = "";
 
@@ -270,7 +234,6 @@ function song (artist, title, youtubeId, bgImage, stat1, stat2, stat3, stat4) {
   this.energy = stat2,
   this.valence = stat3,
   this.instru = stat4,
-  // this.discogsId = "",
   // on song change, updates background
   this.changeBg = function (songNum) {
     $("body").attr("class",songNum);
@@ -287,15 +250,7 @@ function song (artist, title, youtubeId, bgImage, stat1, stat2, stat3, stat4) {
             $("#relatedList").append("<li><img height=100 src=" + d.artists[i].images[0].url + ">" + relatedArtists[i].name + "<img src=img/play.png class=preview id=" + relatedArtists[i].id + "></li>");
           };
       });
-    // var relatedHeight = $("#relatedList").height();
-    // console.log(relatedHeight);
-    // $("#relatedList").css("margin-top",(screen.height/3));
   },
-
-
-//   $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[2].artist + "&jsoncallback=?", function(d) {
-//   console.log(d.resultsPage.results.event["0"].displayName);
-// });
 
   // on song change, updates upcoming events from Seat Geek
   this.changeEvents = function () {
@@ -316,61 +271,12 @@ function song (artist, title, youtubeId, bgImage, stat1, stat2, stat3, stat4) {
         $("#showList").html(msg);
       }
 })},
+    // obtains artist bio from last.fm
     this.getBio = function () {
       $.get("http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=" + songs[songNum].artist + "&api_key=ef4bf194f0542ed37c6d13c45aa93b0f&format=json", function(d) { 
         $("#bioText").html(d.artist.bio.content);
       })},
-      this.updateAll = function () {
-        this.changeBg(songNum);
-        this.changeRelated();
-        this.changeEvents();
-        this.getBio();
-  },
-    // this.getTopTracks = function () {
-    //   var r = $.Deferred();
-    //   $.ajax({
-    //   url: "https://api.spotify.com/v1/artists/" + songs[songNum].spotifyId + "/top-tracks?country=US",
-    //   async: false,
-    //   success: function(d) {
-    //     for (var i=0;i<d.tracks.length;i++) {
-    //       topTracks[i] = d.tracks[i].id;
-    //       songs[songNum].topTracks = topTracks;
-    //     };
-    //   }
-    // })
-    //   return r;
-    // },
-    // d.audio_features[i].energy,
-    // d.audio_features[i].valence,
-    // d.audio_features[i].instrumentalness
-    // this.setStats = function () {
-    //   var r = $.Deferred();
-    //   spotifyApi.getAudioFeaturesForTracks(topTracks, function(err, d) {
-    //   var artistDanceability = 0;
-    //   var artistEnergy = 0;
-    //   var artistValence = 0;
-    //   var artistInstru = 0;
-    //   for (var i=0;i<10;i++) {
-    //     artistDanceability += d.audio_features[i].danceability;
-    //     artistEnergy += d.audio_features[i].energy;
-    //     artistValence += d.audio_features[i].valence;
-    //     artistInstru += d.audio_features[i].instrumentalness;
-    //   };
-    //     songs[songNum].danceability = artistDanceability/10;
-    //     songs[songNum].energy = artistEnergy/10;
-    //     songs[songNum].valence = artistValence/10;
-    //     songs[songNum].instru = artistInstru/10;
-    //   });
-    //   // $("chart1").html('');
-    //   // $("chart2").html('');
-    //   // $("chart3").html('');
-    //   // $("chart4").html('');
-    //   // artistStats1.update(parseInt((this.danceability * 100).toFixed(0)));
-    //   // artistStats2.update(parseInt((this.energy * 100).toFixed(0)));
-    //   // artistStats3.update(parseInt((this.valence * 100).toFixed(0)));
-    //   // artistStats4.update(parseInt((this.instru * 100).toFixed(0)));
-    //   return r;
-    // },
+    // updates artist stats d3 charts
     this.drawChart = function () {
       $("chart1").html('');
       $("chart2").html('');
@@ -381,6 +287,7 @@ function song (artist, title, youtubeId, bgImage, stat1, stat2, stat3, stat4) {
       artistStats3.update(parseInt((this.valence * 100).toFixed(0)));
       artistStats4.update(parseInt((this.instru * 100).toFixed(0)));
     },
+    // updates available purchases
     this.changePurchases = function () {
     $.getJSON("http://api.7digital.com/1.2/artist/releases?artistid=" + songs[songNum].sevenDigitalId + "&country=ww&imageSize=350&type=album&oauth_consumer_key=7dyu4vag3h4k&oauth_consumer_secret=9acf9s3ad8eem4f5", function(d) {
           var msg = '';
@@ -399,10 +306,10 @@ function song (artist, title, youtubeId, bgImage, stat1, stat2, stat3, stat4) {
   }
 }
 
+// changes artist name on stats page
 function nameDNA() {
   $("#nameDNA").text(songs[songNum].artist);
 }
-
 
 // moves to next song in songs array
 function nextSong() {
@@ -486,7 +393,6 @@ $("#iconMenu ul li").click(function(e) {
       break;
     case "viewVid":
       $("#hideVid, #player").toggle();
-      $(this).children().toggleClass("activeIcon").toggleClass("icons");
       break;
     case "info":
       $("#hideBio, #bio").toggle();
@@ -494,17 +400,19 @@ $("#iconMenu ul li").click(function(e) {
   }
 });
 
+// handles onclick() call when clicking nav arrows
 toPage = function(num) {
   $("body").removeClass("viewing-page-" + (num - 1));
   $("body").addClass("viewing-page-" + num);
   $("this").moveTo(num);
-  if (num > 1) {
-    $("#miniPlayer").show();
-  } else {
-    $("#miniPlayer").hide()
-  }
+  // if (num > 1) {
+  //   $("#miniPlayer").show();
+  // } else {
+  //   $("#miniPlayer").hide()
+  // }
 };
 
+// Settings for onepage scroll plugin
 $(".main").onepage_scroll({
    sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
    easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",
@@ -512,8 +420,16 @@ $(".main").onepage_scroll({
    animationTime: 1000,             // AnimationTime let you define how long each section takes to animate
    pagination: false,                // You can either show or hide the pagination. Toggle true for show, false for hide.
    updateURL: false,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
-   beforeMove: function(index) {},  // This option accepts a callback function. The function will be called before the page moves.
-   afterMove: function(index) {},   // This option accepts a callback function. The function will be called after the page moves.
+   beforeMove: function(index) {
+    if ($("body").hasClass("viewing-page-1")) {
+      $("#miniPlayer").hide();
+    } else {
+      $("#miniPlayer").show();
+    }
+
+   },  // This option accepts a callback function. The function will be called before the page moves.
+   afterMove: function(index) {
+   },   // This option accepts a callback function. The function will be called after the page moves.
    loop: false,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
    keyboard: true,                  // You can activate the keyboard controls
    responsiveFallback: false,        // You can fallback to normal page scroll by defining the width of the browser in which
@@ -522,11 +438,21 @@ $(".main").onepage_scroll({
    direction: "horizontal"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".  
 });
 
+
+// onboarding overlay
+$("#onboard").hide().delay(1000).fadeIn(1000);
+$("#hideOnboard").click(function() {
+  $("#onboard").toggle()
+})
+
+// hides/shows artist bio information
 $("#bio").hide();
 $("#hideBio").hide();
 $("#hideBio").click(function() {
   $("#bio, #hideBio").toggle();
 });
+
+
 
 showBio = function() {
   $("#menu").css('right', '105%');
@@ -534,6 +460,7 @@ showBio = function() {
   $("#bio, #hideBio").toggle();
 }
 
+// hides vid unless eyeball icon is clicked
 $("#hideVid").hide();
 $("#hideVid").click(function() {
   $("#player, #hideVid").toggle();
@@ -543,19 +470,21 @@ $("#toPage2").click(function() {
   $("body").removeClass("viewing-page-1").addClass("viewing-page-2");
 });
 
+// handles behavior of menu when icon clicked
 $("#menu").css('right', '105%');
 $(".mobileMenu").click(function() {
   $("#menu").css('right', '60%');
   $(".main").css('left', '40%');
 });
 
+// hides menu when X is clicked
 $("#hideMenu").click(function() {
   $("#menu").css('right', '105%');
   $(".main").css('left', '0%');
 });
 
+// navigates to selected page in menu, shifts menu and site back to normal
 $("#menu").click(function(e) {
-  console.log(e);
   if (e.target.id) {
     $("#menu").css('right', '105%');
     $(".main").css('left', '0%');
@@ -563,34 +492,68 @@ $("#menu").click(function(e) {
     
 }});
 
-// var myChart = new RadialProgressChart('#chart2', {series: [24, 85]});
-
-//   function getRandom(min, max) {
-//     return Math.random() * (max - min) + min;
-//   }
-
-//   (function loop() {
-//     myChart.update(Math.round(getRandom(50, 800)));
-//     setTimeout(loop, 3000);
-//   })();
-
+// d3 charting section
 function delayedChart() {
   setTimeout(drawChart, 200);
 }
 
-var artistStats1 = new RadialProgressChart('#chart1', 
-  {series: [parseInt((songs[songNum].danceability).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].danceability).toFixed(0))
-      }});
-      var artistStats2 = new RadialProgressChart('#chart2', {series: [parseInt((songs[songNum].energy).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].energy).toFixed(0))
-      }});
-      var artistStats3 = new RadialProgressChart('#chart3', {series: [parseInt((songs[songNum].valence).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].valence).toFixed(0))
-      }});
-      var artistStats4 = new RadialProgressChart('#chart4', {series: [parseInt((songs[songNum].instru).toFixed(0))], center: function() {
-        return parseInt((songs[songNum].instru).toFixed(0))
-      }});
+var artistStats1 = new RadialProgressChart('#chart1', {
+  series: [{
+    value: parseInt((songs[songNum].danceability).toFixed(0)),
+    color: ['red', '#7CFC00']
+  }],
+  center: function(d) {
+    return parseInt((songs[songNum].danceability).toFixed(0))
+  }
+});
+
+var artistStats2 = new RadialProgressChart('#chart2', {
+  series: [{
+    value: parseInt((songs[songNum].energy).toFixed(0)),
+    color: ['green', '#7CFC00']
+  }],
+  center: function(d) {
+    return parseInt((songs[songNum].energy).toFixed(0))
+  }
+});
+
+var artistStats3 = new RadialProgressChart('#chart3', {
+  series: [{
+    value: parseInt((songs[songNum].valence).toFixed(0))
+  }],
+  center: function(d) {
+    return parseInt((songs[songNum].valence).toFixed(0))
+  }
+});
+
+var artistStats4 = new RadialProgressChart('#chart4', {
+  series: [{
+    value: parseInt((songs[songNum].instru).toFixed(0)),
+    color: ['orange', '#fcbd00']
+  }],
+  center: function(d) {
+    return parseInt((songs[songNum].instru).toFixed(0))
+  }
+});
+
+
+// var artistStats1 = new RadialProgressChart('#chart1', 
+//   {series: [parseInt((songs[songNum].danceability).toFixed(0))], 
+//    center: function() {
+//         return parseInt((songs[songNum].danceability).toFixed(0))
+//       }});
+   //    var artistStats2 = new RadialProgressChart('#chart2', {series: [parseInt((songs[songNum].energy).toFixed(0))], 
+   // center: function() {
+   //      return parseInt((songs[songNum].energy).toFixed(0))
+   //    }});
+   //    var artistStats3 = new RadialProgressChart('#chart3', {series: [parseInt((songs[songNum].valence).toFixed(0))], 
+   // center: function() {
+   //      return parseInt((songs[songNum].valence).toFixed(0))
+   //    }});
+   //    var artistStats4 = new RadialProgressChart('#chart4', {series: [parseInt((songs[songNum].instru).toFixed(0))], 
+   // center: function() {
+   //      return parseInt((songs[songNum].instru).toFixed(0))
+   //    }});
 
 function drawChart() {
       artistStats1.update(songs[songNum].danceability);
@@ -599,45 +562,27 @@ function drawChart() {
       artistStats4.update(songs[songNum].instru);
     }
 
-// var artistStats1 = new RadialProgressChart('#chart1', {series: [parseInt((songs[songNum].danceability * 100).toFixed(0))]});
-// var artistStats2 = new RadialProgressChart('#chart2', {series: [parseInt((songs[songNum].energy * 100).toFixed(0))]});
-// var artistStats3 = new RadialProgressChart('#chart3', {series: [parseInt((songs[songNum].valence * 100).toFixed(0))]});
-// var artistStats4 = new RadialProgressChart('#chart4', {series: [parseInt((songs[songNum].instru * 100).toFixed(0))]});
+// misc variable declarations
+var topTracks = [];
+var topTracksStats = [];
+var topTracksStatsAvg = [];
 
-// artistStats.update({series:[{Danceability: parseInt((songs[songNum].danceability * 100).toFixed(0))}, {Energy: parseInt((songs[songNum].energy * 100).toFixed(0))}, {Valence: parseInt((songs[songNum].valence * 100).toFixed(0))}, {Instrumentalness: parseInt((songs[songNum].instru * 100).toFixed(0))}]});
+var text = "beech.fm";
 
-// ['Danceability', this.danceability],
-    //     ['Energy', this.energy],
-    //     ['Valence', this.valence],
-    //     ['Instrumentalness', this.instru]
+for(var i in text) { 
+  if(text[i] === " ") {
+    $(".wavetext").append( $("<span>").html("&nbsp;") ); 
+  } else {  
+    $(".wavetext").append( $("<span>").text(text[i]) ); 
+  }
+}
 
-
-
-// AJAX call to search for seat geek artist ID
-// $.get("https://api.seatgeek.com/2/performers?q=lolitas&client_id=NzE4ODI2NHwxNDkwODc2MTA0Ljk5", function(d) {
-//   console.log(d);
-// });
+// Various AJAX calls to obtain artist information. Keeping here just in case I need it later
 
 // Testing discogs API
 // $.get("https://api.discogs.com/artists/1626911", function(d) {
 //   console.log(d);
 // });
-
-//Testing Blitzr API
-// $.get("https://api.blitzr.com/buy/artist/mp3/?key=7f643b85049c768c1727dbeaf587f824&uuid=ARv88shncZqW3pWVVi", function(d) {
-//   console.log(d);
-// });
-
-// $.get("https://api.blitzr.com/search/artist/?key=7f643b85049c768c1727dbeaf587f824&query=" + songs[0].artist + "&limit=10&start=0", function(d) {
-//   console.log(d[0].uuid);
-// });
-
-//Testing MusicGraph API
-// $.get("http://api.musicgraph.com/api/v2/artist/420df292-3005-2df6-8346-40adf5415964/metrics?api_key=a1f90e8c4b96ff2812961f6a9b815e1c", function(d) {
-//   console.log(d);
-// });
-
-// http://api.mndigital.com/?method=search.gettracks&title=Come%20As%20You%20Are&artist=Nirvana
 
 //Testing songkick API
 // $.getJSON("http://api.songkick.com/api/3.0/events.json?apikey=y2QamR9aQjPzpsYs&artist_name=" + songs[2].artist + "&jsoncallback=?", function(d) {
@@ -649,28 +594,12 @@ function drawChart() {
 //   console.log(songs[1].SevenDigitalId);
 // });
 
-// http://api.7digital.com/1.2/artist/releases?artistid=1&oauth_consumer_key=YOUR_KEY_HERE&country=GB&pagesize=2&usageTypes=download,subscriptionstreaming,adsupportedstreaming
-
-// http://api.7digital.com/1.2/artist/search?q=pink&sort=score%20desc&country=US&oauth_consumer_key=YOUR_KEY_HERE&pagesize=2 
-
-// &oauth_consumer_key=7dyu4vag3h4k
-
-// $.ajax({
-//       url: "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=maceo%20plex&api_key=ef4bf194f0542ed37c6d13c45aa93b0f&format=json",
-//       async: false,
-//       success: function(d) {
-//         console.log(d);
-//       }
-//     }) 
-
 // spotifyApi.getArtistTopTracks(songs[0].spotifyId, 
 //       function(err, d){
 //         console.log(d);
 // });
 
-var topTracks = [];
-var topTracksStats = [];
-var topTracksStatsAvg = [];
+
 // $.ajax({
 //       url: "https://api.spotify.com/v1/artists/" + songs[songNum].spotifyId + "/top-tracks?country=US",
 //       async: true,
@@ -703,12 +632,3 @@ var topTracksStatsAvg = [];
 //                         ];
 //   };
 // });
-
-
-
-// for (var i=0;i<4;i++) {
-//   for (var j=0;j<10;j++) {
-//     topTracksStatsAvg[i] += topTracksStats[j][i];
-//   }
-//     topTracksStatsAvg[i] = topTracksStatsAvg[i]/4;
-// }
